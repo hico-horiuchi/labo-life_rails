@@ -1,0 +1,37 @@
+.table-responsive
+  table.table.table-condensed.table-bordered
+    thead
+      th
+      th キャプション
+      th 日時
+      th 議事
+      th 作成者
+    tbody
+      - @seminors.each do |seminor|
+        - accent = 'active' unless seminor.active?
+        tr class="#{accent}"
+          td
+            - if seminor.active?
+              = link_to edit_seminor_path(seminor.id), class: "btn btn-success btn-xs", remote: true do
+                span.glyphicon.glyphicon-pencil
+                | &nbsp;編集
+              | &nbsp;
+              = link_to deactivate_seminor_path(seminor.id), class: "btn btn-danger btn-xs js-btn-disable", remote: true, method: :post do
+                span.glyphicon.glyphicon-ban-circle
+                | &nbsp;無効
+            - else
+              = link_to activate_seminor_path(seminor.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
+                span.glyphicon.glyphicon-repeat
+                | &nbsp;復帰
+              | &nbsp;
+              = link_to seminor_path(seminor.id), class: "btn btn-danger btn-xs js-btn-dalete", remote: true, method: :delete do
+                span.glyphicon.glyphicon-remove
+                | &nbsp;削除
+          td
+            = seminor.caption
+          td
+            #{seminor.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{seminor.end_at.strftime('%Y/%m/%d %H:%M')}
+          td
+            = User.id_is(seminor.chairman_user_id).first.name
+          td
+            = User.id_is(seminor.created_user_id).first.name

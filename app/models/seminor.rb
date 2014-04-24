@@ -14,9 +14,10 @@
 #
 
 class Seminor < ActiveRecord::Base
-  validates :date, presence: true
   validates :chairman_user_id, presence: true
   validates :created_user_id, presence: true
+  validates :start_at, presence: true
+  validates :end_at, presence: true
   scope :id_is, -> (id) { where(id: id) }
 
   include State

@@ -1,0 +1,45 @@
+- unless @seminor
+  - @seminor = Seminor.new
+  - @title = '新規登録'
+  - @button_caption = '登録'
+- else
+  - @title = '編集'
+  - @button_caption = '更新'
+
+= form_for @seminor, html: { class: 'form-horizontal' }, remote: true do |f|
+  - modal_body = capture do
+    = f.hidden_field :created_user_id, value: current_user.id
+    .form-group
+      = f.label :caption, 'キャプション', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.text_field :caption, autofocus: true, class: 'form-control', placeholder: '例) 定例ゼミナール'
+    .form-group
+      = f.label :start_at, '開始日時', class: 'col-md-4 control-label'
+      .col-md-5
+        .input-group.date#datetimepicker_start_at
+          = f.text_field :start_at, autofocus: true, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mmy'
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+    .form-group
+      = f.label :end_at, '終了日時', class: 'col-md-4 control-label'
+      .col-md-5
+        .input-group.date#datetimepicker_end_at
+          = f.text_field :end_at, autofocus: true, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mmy'
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+    .form-group
+      = f.label :chairman_user_id, '議事', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.collection_select :chairman_user_id, User.where(state: User::State::ACTIVE), :id, :name, {}, { class: 'form-control' }
+
+  - modal_footer = capture do
+    = f.submit @button_caption, class: 'btn btn-primary'
+    = content_tag :button, "閉じる", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+  - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer
+
+script type="text/javascript"
+  | $(function () {
+  |   $('#datetimepicker_start_at').datetimepicker({ format: 'YYYY/MM/DD HH:mm' });
+  |   $('#datetimepicker_end_at').datetimepicker({ format: 'YYYY/MM/DD HH:mm' });
+  | });

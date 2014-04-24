@@ -1,0 +1,11 @@
+- @title = 'ゼミナール管理'
+
+h3.bold #{@title}
+
+= link_to new_seminor_path, class: 'btn btn-success', remote: true do
+  span.glyphicon.glyphicon-plus
+  | &nbsp;新規登録
+
+p
+
+= render partial: 'seminors/list'
