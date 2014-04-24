@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/lubieniebieski/bootstrap-datetimepicker-rails.git
-  revision: e56f376e1c2d1719f9e3a322bd5d2d2d3bff18c3
-  specs:
-    bootstrap-datetimepicker-rails (0.0.11)
-
-GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 128f373e151528c9516ea8df32831fc60ac1c35d
   branch: bootstrap3
@@ -50,6 +44,8 @@ GEM
     arel (5.0.1.20140414130214)
     ast (2.0.0)
     bcrypt (3.1.7)
+    bootstrap3-datetimepicker-rails (3.0.0)
+      momentjs-rails (~> 2.5.0)
     builder (3.2.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -89,6 +85,8 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (5.3.3)
+    momentjs-rails (2.5.1)
+      railties (>= 3.1)
     multi_json (1.9.2)
     parser (2.1.9)
       ast (>= 1.1, < 3.0)
@@ -198,12 +196,13 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bcrypt (~> 3.1.7)
-  bootstrap-datetimepicker-rails!
+  bootstrap3-datetimepicker-rails (~> 3.0.0)
   coffee-rails (~> 4.0.0)
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
+  momentjs-rails (~> 2.5.0)
   pg
   pry-rails
   quiet_assets

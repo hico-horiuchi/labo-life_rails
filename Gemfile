@@ -48,5 +48,6 @@ end
 
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
-gem 'bootstrap-datetimepicker-rails', git: 'git://github.com/lubieniebieski/bootstrap-datetimepicker-rails.git'
+gem 'momentjs-rails', '~> 2.5.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0'
 gem 'slim-rails'
