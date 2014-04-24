@@ -3,13 +3,14 @@
 # Table name: seminors
 #
 #  id               :integer          not null, primary key
-#  date             :datetime         not null
 #  chairman_user_id :integer          not null
 #  created_user_id  :integer          not null
 #  caption          :string(255)
 #  state            :integer          default(0), not null
 #  created_at       :datetime
 #  updated_at       :datetime
+#  start_at         :datetime         not null
+#  end_at           :datetime         not null
 #
 
 require 'spec_helper'
