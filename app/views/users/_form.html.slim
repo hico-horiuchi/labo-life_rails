@@ -1,0 +1,40 @@
+- unless @user
+  - @user = User.new
+  - @title = '新規登録'
+  - @button_caption = '登録'
+- else
+  - @title = '編集'
+  - @button_caption = '更新'
+
+= form_for @user, html: { class: 'form-horizontal' }, remote: true do |f|
+  - modal_body = capture do
+    .form-group
+      = f.label :name, '名前', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.text_field :name, autofocus: true, class: 'form-control', placeholder: '例) 研究 太郎'
+    .form-group
+      = f.label :student_no, '学籍番号', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.text_field :student_no, autofocus: true, class: 'form-control', placeholder: '例) 00T000'
+    .form-group
+      = f.label :email, 'メールアドレス', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.text_field :email, autofocus: true, class: 'form-control', placeholder: '例) 00t000@labolife-u.ac.jp'
+    .form-group
+      = f.label :password, 'パスワード', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: '例) password'
+    .form-group
+      = f.label :password_confirmation, 'パスワード (確認)', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: '例) password'
+    .form-group
+      = f.label :level, 'レベル', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.select :level, Level::SELECT, {}, { class: 'form-control' }
+
+  - modal_footer = capture do
+    = f.submit @button_caption, class: 'btn btn-primary'
+    = content_tag :button, "閉じる", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+  - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

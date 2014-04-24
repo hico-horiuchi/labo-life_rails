@@ -16,8 +16,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  validates :email, presence: true
-  validates :student_no, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :student_no, presence: true, uniqueness: true
   scope :id_is, -> (id) { where(id: id) }
 
   include State

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root to: 'top#index'
 
+  get 'users/home' => 'users#home', as: :home_user
+  resources :users
+  post 'users/:id/activate' => 'users#activate', as: :activate_user
+  post 'users/:id/deactivate' => 'users#deactivate', as: :deactivate_user
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

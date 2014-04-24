@@ -1,0 +1,14 @@
+- @title = 'ユーザー管理'
+
+.row
+  .col-md-2
+    h3.bold #{@title}
+  .col-md-2
+    p
+    = link_to new_user_path, class: 'btn btn-success', remote: true do
+      span.glyphicon.glyphicon-plus
+      | &nbsp;新規登録
+
+p
+
+= render partial: 'users/list'
