@@ -30,8 +30,8 @@ describe UsersController do
   describe '#create' do
     before do
       session[:user_id] = FactoryGirl.create(:assistant).id
-      @user_params = FactoryGirl.attributes_for(:student)
-      xhr :post, :create, user: @user_params
+      user_params = FactoryGirl.attributes_for(:student)
+      xhr :post, :create, user: user_params
     end
     it { expect(response).to be_success }
     it { expect(assigns[:user]).to eq(User.last) }
@@ -40,9 +40,9 @@ describe UsersController do
 
   describe '#edit' do
     before do
-      @user = FactoryGirl.create(:assistant)
-      session[:user_id] = @user.id
-      xhr :get, :edit, id: @user.id
+      user = FactoryGirl.create(:assistant)
+      session[:user_id] = user.id
+      xhr :get, :edit, id: user.id
     end
     it { expect(response).to be_success }
   end
@@ -50,9 +50,9 @@ describe UsersController do
   describe '#update' do
     before do
       session[:user_id] = FactoryGirl.create(:assistant).id
-      @user = FactoryGirl.create(:student)
-      @user_params = FactoryGirl.attributes_for(:student)
-      xhr :patch, :update, id: @user.id, user: @user_params
+      user = FactoryGirl.create(:student)
+      user_params = FactoryGirl.attributes_for(:student)
+      xhr :patch, :update, id: user.id, user: user_params
     end
     it { expect(response).to be_success }
     it { expect(assigns[:result]).to be_true }

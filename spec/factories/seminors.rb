@@ -18,5 +18,9 @@
 
 FactoryGirl.define do
   factory :seminor do
+    caption 'ゼミナール'
+    start_at '2100/01/01 12:00'
+    end_at '2100/12/31 12:00'
+    place '研究室'
   end
 end
