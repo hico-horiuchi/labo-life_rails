@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title #{@title} | LaboLife
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    = stylesheet_link_tag    'application', 'data-turbolinks-track' => true, media: 'all'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  body
+    .modal-form
+
+    .container
+      = image_tag 'logo.png', class: 'logo'
+
+    nav.navbar.navbar-inverse role="navigation"
+      .container
+        .navbar-header
+          button.navbar-toggle type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          = link_to root_path, class: 'navbar-brand' do
+            = image_tag 'lab.png', class: 'brand-icon'
+            span.brand-with-icon
+
+    .container
+      - if notice
+        .alert.alert-info.alert-dismissable
+          button.close type="button" data-dismiss="alert" aria-hidden="true" &times;
+          = notice
+      - if alert
+        .alert.alert-danger.alert-dismissable
+          button.close type="button" data-dismiss="alert" aria-hidden="true" &times;
+          = alert
+      = yield
+      footer
+        br
+        p &copy; Enjoy Laboratory Project
