@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: 'top#index'
 
+  get 'login' => 'login#new', as: :new_login
+  post 'login' => 'login#login'
+  get 'login/destroy' => 'login#destroy', as: :destroy_login
+
   get 'users/home' => 'users#home', as: :home_user
   resources :users
   post 'users/:id/activate' => 'users#activate', as: :activate_user

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :load_user
+  before_action :authenticate_user!
+  before_action :assistant_user!, only: [:new, :create, :active, :deactive, :destroy]
 
   def home
   end
