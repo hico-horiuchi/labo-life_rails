@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/lubieniebieski/bootstrap-datetimepicker-rails.git
+  revision: e56f376e1c2d1719f9e3a322bd5d2d2d3bff18c3
+  specs:
+    bootstrap-datetimepicker-rails (0.0.11)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 128f373e151528c9516ea8df32831fc60ac1c35d
   branch: bootstrap3
@@ -192,6 +198,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bcrypt (~> 3.1.7)
+  bootstrap-datetimepicker-rails!
   coffee-rails (~> 4.0.0)
   factory_girl_rails
   jbuilder (~> 2.0)
