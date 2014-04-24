@@ -4,6 +4,7 @@
       th
       th キャプション
       th 日時
+      th 場所
       th 議事
       th 作成者
     tbody
@@ -31,6 +32,8 @@
             = seminor.caption
           td
             #{seminor.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{seminor.end_at.strftime('%Y/%m/%d %H:%M')}
+          td
+            = seminor.place
           td
             = User.id_is(seminor.chairman_user_id).first.name
           td

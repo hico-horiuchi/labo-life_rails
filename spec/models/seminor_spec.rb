@@ -11,6 +11,7 @@
 #  updated_at       :datetime
 #  start_at         :datetime         not null
 #  end_at           :datetime         not null
+#  place            :string(255)      default(""), not null
 #
 
 require 'spec_helper'

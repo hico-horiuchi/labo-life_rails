@@ -28,6 +28,10 @@
           span.input-group-addon
             span.glyphicon.glyphicon-calendar
     .form-group
+      = f.label :place, '場所', class: 'col-md-4 control-label'
+      .col-md-5
+        = f.text_field :place, autofocus: true, class: 'form-control', placeholder: '例) 研究室'
+    .form-group
       = f.label :chairman_user_id, '議事', class: 'col-md-4 control-label'
       .col-md-5
         = f.collection_select :chairman_user_id, User.where(state: User::State::ACTIVE), :id, :name, {}, { class: 'form-control' }

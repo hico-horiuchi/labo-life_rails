@@ -11,6 +11,7 @@
 #  updated_at       :datetime
 #  start_at         :datetime         not null
 #  end_at           :datetime         not null
+#  place            :string(255)      default(""), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

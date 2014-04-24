@@ -54,6 +54,6 @@ class SeminorsController < ApplicationController
   end
 
   def seminor_params
-    params.require(:seminor).permit(:caption, :start_at, :end_at, :chairman_user_id, :created_user_id)
+    params.require(:seminor).permit(:caption, :start_at, :end_at, :place, :chairman_user_id, :created_user_id)
   end
 end

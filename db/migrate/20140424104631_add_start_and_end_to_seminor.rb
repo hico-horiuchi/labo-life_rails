@@ -6,6 +6,5 @@ class AddStartAndEndToSeminor < ActiveRecord::Migration
       t.datetime :start_at, null: false
       t.datetime :end_at, null: false
     end
-
   end
 end
