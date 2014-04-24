@@ -8,7 +8,7 @@ module Level
 
   def self.included(base)
     base.class_eval do
-      validates :level, inclusion: { in: (Level::MEMBERSHIP..Level::ADMIN).to_a }
+      validates :level, inclusion: { in: (Level::STUDENT..Level::TEACHER).to_a }
 
       public
 
