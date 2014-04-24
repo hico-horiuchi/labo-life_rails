@@ -5,3 +5,13 @@
     h3.bold LaboLifeへようこそ
     p
       | 研究室の活動、主にゼミナールを支援するプロジェクトです。
+
+  .col-md-6
+    .well
+      = form_for :user, html: { class: 'form' } do |f|
+        .form-group
+          = f.text_field :email, autofocus: true, class: 'form-control', placeholder: 'メールアドレス'
+        .form-group
+          = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'パスワード'
+        .form-group
+          = f.submit 'ログイン', class: 'btn btn-info'
