@@ -16,16 +16,20 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user = nil unless @user.save
+    @result = @user.save
+    @user = nil unless @result
     flash[:notice] = '登録できました。'
   end
 
   def edit
+    redirect_to home_user_path if !current_user.assistant? && params[:id].to_i != current_user.id
     render :show_modal_form
   end
 
   def update
-    @user = nil unless @user.update(user_params)
+    redirect_to home_user_path if !current_user.assistant? && params[:id].to_i != current_user.id
+    @result = @user.update(user_params)
+    @user = nil unless @result
     flash[:notice] = '更新できました。'
   end
 
