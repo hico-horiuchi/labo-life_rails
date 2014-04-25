@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  chairman_user_id :integer          not null
 #  created_user_id  :integer          not null
-#  caption          :string(255)
+#  caption          :string(255)      default(""), not null
 #  state            :integer          default(0), not null
 #  created_at       :datetime
 #  updated_at       :datetime
@@ -20,6 +20,7 @@ class Seminor < ActiveRecord::Base
   validates :start_at, presence: true
   validates :end_at, presence: true
   validates :place, presence: true
+  validates :caption, presence: true
   scope :id_is, -> (id) { where(id: id) }
 
   has_many :attends

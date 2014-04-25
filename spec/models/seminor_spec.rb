@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  chairman_user_id :integer          not null
 #  created_user_id  :integer          not null
-#  caption          :string(255)
+#  caption          :string(255)      default(""), not null
 #  state            :integer          default(0), not null
 #  created_at       :datetime
 #  updated_at       :datetime
