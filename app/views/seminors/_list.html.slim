@@ -29,7 +29,10 @@
                 span.glyphicon.glyphicon-remove
                 | &nbsp;削除
           td
-            = seminor.caption
+            = link_to seminor_path(seminor.id) do
+              span.glyphicon.glyphicon-new-window
+              | &nbsp;
+              = seminor.caption
           td
             #{seminor.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{seminor.end_at.strftime('%Y/%m/%d %H:%M')}
           td

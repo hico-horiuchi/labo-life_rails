@@ -1,12 +1,15 @@
 class SeminorsController < ApplicationController
   before_action :load_seminor
   before_action :authenticate_user!
-  before_action :assistant_user!, except: [:index]
+  before_action :assistant_user!, except: [:index, :show]
 
   def index
     from = Time.now.at_beginning_of_day
     to = from + 1.year
     @seminors = Seminor.where(start_at: from...to).order(start_at: :asc)
+  end
+
+  def show
   end
 
   def new
