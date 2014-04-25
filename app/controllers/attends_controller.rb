@@ -6,7 +6,7 @@ class AttendsController < ApplicationController
     @attend = current_user.attends.create(seminor_id: params[:seminor_id])
     @result = @attend.save
     @attend = nil unless @result
-    flash[:notice] = '登録できました。' if @result
+    flash[:notice] = '登録しました。' if @result
     flash[:alert] = '登録できませんでした。' unless @result
     render :reload
   end
@@ -14,7 +14,7 @@ class AttendsController < ApplicationController
   def destroy
     @result = @attend.destroy
     @attend = nil unless @result
-    flash[:notice] = '取消できました。' if @result
+    flash[:notice] = '取消しました。' if @result
     flash[:alert] = '取消できませんでした。' unless @result
     render :reload
   end
