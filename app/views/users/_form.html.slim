@@ -35,6 +35,6 @@
 
   - modal_footer = capture do
     = f.submit @button_caption, class: 'btn btn-primary'
-    = content_tag :button, "閉じる", class: 'btn btn-default', 'data-dismiss' => 'modal'
+    = content_tag :button, "キャンセル", class: 'btn btn-default', 'data-dismiss' => 'modal'
 
   - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer
