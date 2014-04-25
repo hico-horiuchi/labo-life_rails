@@ -7,6 +7,7 @@
 #  seminor_id :integer          default(0), not null
 #  created_at :datetime
 #  updated_at :datetime
+#  state      :integer          default(0), not null
 #
 
 require 'spec_helper'

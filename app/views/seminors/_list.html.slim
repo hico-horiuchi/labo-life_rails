@@ -42,9 +42,14 @@
             - if seminor.active?
               - attend = seminor.attends.where(user_id: current_user.id).first
               - if attend
-                = link_to attend_path(attend.id), class: "btn btn-warning btn-xs", remote: true, method: :delete do
-                  span.glyphicon.glyphicon-minus
-                  | &nbsp;取消
+                - if attend.active?
+                  = link_to deactivate_attend_path(attend.id), class: "btn btn-warning btn-xs", remote: true, method: :post do
+                    span.glyphicon.glyphicon-minus
+                    | &nbsp;欠席
+                - else
+                  = link_to activate_attend_path(attend.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
+                    span.glyphicon.glyphicon-repeat
+                    | &nbsp;復帰
               - else
                 = link_to attend_path(seminor.id), class: "btn btn-success btn-xs", remote: true, method: :post do
                   span.glyphicon.glyphicon-flag

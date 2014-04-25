@@ -11,6 +11,24 @@ class AttendsController < ApplicationController
     render :reload
   end
 
+  def activate
+    @attend.state = Attend::State::ACTIVE
+    @result = @attend.save
+    @attend = nil unless @result
+    flash[:notice] = '復帰しました。' if @result
+    flash[:alert] = '復帰できませんでした。' unless @result
+    render :reload
+  end
+
+  def deactivate
+    @attend.state = Attend::State::INACTIVE
+    @result = @attend.save
+    @attend = nil unless @result
+    flash[:notice] = '欠席しました。' if @result
+    flash[:alert] = '欠席できませんでした。' unless @result
+    render :reload
+  end
+
   def destroy
     @result = @attend.destroy
     @attend = nil unless @result

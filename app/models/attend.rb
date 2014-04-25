@@ -7,6 +7,7 @@
 #  seminor_id :integer          default(0), not null
 #  created_at :datetime
 #  updated_at :datetime
+#  state      :integer          default(0), not null
 #
 
 class Attend < ActiveRecord::Base
@@ -16,4 +17,6 @@ class Attend < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :seminor
+
+  include State
 end

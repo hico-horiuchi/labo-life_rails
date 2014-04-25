@@ -23,9 +23,9 @@ p
         td 出席者
         td
           - i = 0
-          - @seminor.attends.each do |attend|
+          - @seminor.attends.where(state: Attend::State::ACTIVE).each do |attend|
             span.label.label-default
-              = attend.user.name.nil? ? '-' : attend.user.name
+              = attend.user.name
             | &nbsp;
             - i += 1
             - if i % 5 == 0

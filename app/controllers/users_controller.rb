@@ -52,7 +52,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @result = @user.destroy
+    @result = @user.attends.destroy_all
+    @result = @user.destroy if @result
     @user = nil unless @result
     flash[:notice] = '削除しました。' if @result
     flash[:alert] = '削除できませんでした。' unless @result

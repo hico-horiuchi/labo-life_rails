@@ -52,7 +52,8 @@ class SeminorsController < ApplicationController
   end
 
   def destroy
-    @result = @seminor.destroy
+    @result = @seminor.attends.destroy_all
+    @result = @seminor.destroy if @result
     @seminor = nil unless @result
     flash[:notice] = '削除しました。' if @result
     flash[:alert] = '削除できませんでした。' unless @result
