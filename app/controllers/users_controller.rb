@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @result = @user.save
     @user = nil unless @result
-    flash[:notice] = '登録できました。'
+    flash[:notice] = '登録しました。' if @result
   end
 
   def edit
@@ -30,23 +30,32 @@ class UsersController < ApplicationController
     redirect_to home_user_path if !current_user.assistant? && params[:id].to_i != current_user.id
     @result = @user.update(user_params)
     @user = nil unless @result
-    flash[:notice] = '更新できました。'
+    flash[:notice] = '更新しました。' if @result
   end
 
   def activate
     @user.state = User::State::ACTIVE
-    @user = nil unless @user.save
+    @result = @user.save
+    @user = nil unless @result
+    flash[:notice] = '有効化しました。' if @result
+    flash[:alert] = '有効化できませんでした。' unless @result
     render :reload
   end
 
   def deactivate
     @user.state = User::State::INACTIVE
-    @user = nil unless @user.save
+    @result = @user.save
+    @user = nil unless @result
+    flash[:notice] = '無効化しました。' if @result
+    flash[:alert] = '無効化できませんでした。' unless @result
     render :reload
   end
 
   def destroy
-    @user = nil unless @user.destroy
+    @result = @user.destroy
+    @user = nil unless @result
+    flash[:notice] = '削除しました。' if @result
+    flash[:alert] = '削除できませんでした。' unless @result
     render :reload
   end
 

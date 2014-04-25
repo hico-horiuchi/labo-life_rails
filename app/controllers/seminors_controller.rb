@@ -20,7 +20,7 @@ class SeminorsController < ApplicationController
     @seminor = Seminor.new(seminor_params)
     @result = @seminor.save
     @seminor = nil unless @result
-    flash[:notice] = '登録できました。'
+    flash[:notice] = '登録しました。' if @result
   end
 
   def edit
@@ -30,23 +30,32 @@ class SeminorsController < ApplicationController
   def update
     @result = @seminor.update(seminor_params)
     @seminor = nil unless @result
-    flash[:notice] = '更新できました。'
+    flash[:notice] = '更新しました。' if @result
   end
 
   def activate
     @seminor.state = Seminor::State::ACTIVE
-    @seminor = nil unless @seminor.save
+    @result = @seminor.save
+    @seminor = nil unless @result
+    flash[:notice] = '有効化しました。' if @result
+    flash[:alert] = '有効化できませんでした。' unless @result
     render :reload
   end
 
   def deactivate
     @seminor.state = Seminor::State::INACTIVE
-    @seminor = nil unless @seminor.save
+    @result = @seminor.save
+    @seminor = nil unless @result
+    flash[:notice] = '無効化しました。' if @result
+    flash[:alert] = '無効化できませんでした。' unless @result
     render :reload
   end
 
   def destroy
-    @seminor = nil unless @seminor.destroy
+    @result = @seminor.destroy
+    @seminor = nil unless @result
+    flash[:notice] = '削除しました。' if @result
+    flash[:alert] = '削除できませんでした。' unless @result
     render :reload
   end
 
