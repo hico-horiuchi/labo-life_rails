@@ -10,7 +10,7 @@ describe SeminorsController do
     it { expect(response).to be_success }
   end
 
-  describe '#edit' do
+  describe '#show' do
     before do
       user = FactoryGirl.create(:student)
       session[:user_id] = user.id

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   post 'seminors/:id/activate' => 'seminors#activate', as: :activate_seminor
   post 'seminors/:id/deactivate' => 'seminors#deactivate', as: :deactivate_seminor
 
+  post 'attends/:seminor_id' => 'attends#create', as: :create_attend
+  resources :attends
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

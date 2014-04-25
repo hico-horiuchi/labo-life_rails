@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   validates :student_no, presence: true, uniqueness: true
   scope :id_is, -> (id) { where(id: id) }
 
+  has_many :attends
+
   include State
   include Level
 end

@@ -22,5 +22,7 @@ class Seminor < ActiveRecord::Base
   validates :place, presence: true
   scope :id_is, -> (id) { where(id: id) }
 
+  has_many :attends
+
   include State
 end
