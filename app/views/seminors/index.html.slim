@@ -1,10 +1,14 @@
-- @title = 'ゼミナール管理'
+- if current_user.assistant?
+  - @title = 'ゼミナール管理'
+- else
+  - @title = 'ゼミナール'
 
 h3.bold #{@title}
 
-= link_to new_seminor_path, class: 'btn btn-success', remote: true do
-  span.glyphicon.glyphicon-plus
-  | &nbsp;新規登録
+- if current_user.assistant?
+  = link_to new_seminor_path, class: 'btn btn-success', remote: true do
+    span.glyphicon.glyphicon-plus
+    | &nbsp;新規登録
 
 p
 

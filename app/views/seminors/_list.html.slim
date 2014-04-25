@@ -1,7 +1,8 @@
 .table-responsive
   table.table.table-condensed.table-bordered
     thead
-      th
+      - if current_user.assistant?
+        th
       th キャプション
       th 日時
       th 場所
@@ -9,25 +10,28 @@
       th 作成者
     tbody
       - @seminors.each do |seminor|
-        - accent = 'active' unless seminor.active?
+        - unless seminor.active?
+          - next unless current_user.assistant?
+          - accent = 'active'
         tr class="#{accent}"
-          td
-            - if seminor.active?
-              = link_to edit_seminor_path(seminor.id), class: "btn btn-success btn-xs", remote: true do
-                span.glyphicon.glyphicon-pencil
-                | &nbsp;編集
-              | &nbsp;
-              = link_to deactivate_seminor_path(seminor.id), class: "btn btn-danger btn-xs js-btn-disable", remote: true, method: :post do
-                span.glyphicon.glyphicon-ban-circle
-                | &nbsp;無効
-            - else
-              = link_to activate_seminor_path(seminor.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
-                span.glyphicon.glyphicon-repeat
-                | &nbsp;復帰
-              | &nbsp;
-              = link_to seminor_path(seminor.id), class: "btn btn-danger btn-xs js-btn-dalete", remote: true, method: :delete do
-                span.glyphicon.glyphicon-remove
-                | &nbsp;削除
+          - if current_user.assistant?
+            td
+              - if seminor.active?
+                = link_to edit_seminor_path(seminor.id), class: "btn btn-success btn-xs", remote: true do
+                  span.glyphicon.glyphicon-pencil
+                  | &nbsp;編集
+                | &nbsp;
+                = link_to deactivate_seminor_path(seminor.id), class: "btn btn-danger btn-xs js-btn-disable", remote: true, method: :post do
+                  span.glyphicon.glyphicon-ban-circle
+                  | &nbsp;無効
+              - else
+                = link_to activate_seminor_path(seminor.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
+                  span.glyphicon.glyphicon-repeat
+                  | &nbsp;復帰
+                | &nbsp;
+                = link_to seminor_path(seminor.id), class: "btn btn-danger btn-xs js-btn-dalete", remote: true, method: :delete do
+                  span.glyphicon.glyphicon-remove
+                  | &nbsp;削除
           td
             = link_to seminor_path(seminor.id) do
               span.glyphicon.glyphicon-new-window
