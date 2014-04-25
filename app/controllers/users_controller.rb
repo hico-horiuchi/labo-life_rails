@@ -37,8 +37,8 @@ class UsersController < ApplicationController
     @user.state = User::State::ACTIVE
     @result = @user.save
     @user = nil unless @result
-    flash[:notice] = '有効化しました。' if @result
-    flash[:alert] = '有効化できませんでした。' unless @result
+    flash[:notice] = '復帰しました。' if @result
+    flash[:alert] = '復帰できませんでした。' unless @result
     render :reload
   end
 

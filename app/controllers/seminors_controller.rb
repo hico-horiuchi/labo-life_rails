@@ -37,8 +37,8 @@ class SeminorsController < ApplicationController
     @seminor.state = Seminor::State::ACTIVE
     @result = @seminor.save
     @seminor = nil unless @result
-    flash[:notice] = '有効化しました。' if @result
-    flash[:alert] = '有効化できませんでした。' unless @result
+    flash[:notice] = '復帰しました。' if @result
+    flash[:alert] = '復帰できませんでした。' unless @result
     render :reload
   end
 
