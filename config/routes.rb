@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post 'seminors/:id/activate' => 'seminors#activate', as: :activate_seminor
   post 'seminors/:id/deactivate' => 'seminors#deactivate', as: :deactivate_seminor
 
-  post 'attends/:seminor_id' => 'attends#create', as: :create_attend
+  get 'attends/:seminor_id' => 'attends#new', as: :new_attend
   resources :attends
   post 'attends/:id/activate' => 'attends#activate', as: :activate_attend
   post 'attends/:id/deactivate' => 'attends#deactivate', as: :deactivate_attend

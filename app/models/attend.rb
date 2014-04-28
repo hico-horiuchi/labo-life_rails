@@ -18,6 +18,7 @@ class Attend < ActiveRecord::Base
   belongs_to :user
   belongs_to :seminor
   has_one :report
+  accepts_nested_attributes_for :report, allow_destroy: true
 
   include State
 end

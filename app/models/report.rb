@@ -12,10 +12,15 @@
 #
 
 class Report < ActiveRecord::Base
-  validates :attend_id, presence: true
+  mount_uploader :document, DocumentUploader
   validates :caption, presence: true
   validates :abstract, presence: true
   scope :id_is, -> (id) { where(id: id) }
 
   belongs_to :attend
+
+  def document_exist?
+    return false if document.path.nil?
+    File.exist? document.path
+  end
 end

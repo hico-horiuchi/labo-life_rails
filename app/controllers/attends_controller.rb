@@ -1,14 +1,27 @@
 class AttendsController < ApplicationController
   before_action :load_attend
   before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
+
+  def new
+    render :show_modal_form
+  end
 
   def create
-    @attend = current_user.attends.create(seminor_id: params[:seminor_id])
+    @attend = Attend.new(attend_params)
     @result = @attend.save
     @attend = nil unless @result
     flash[:notice] = '登録しました。' if @result
-    flash[:alert] = '登録できませんでした。' unless @result
-    render :reload
+  end
+
+  def edit
+    render :show_modal_form
+  end
+
+  def update
+    @result = @attend.update(attend_params)
+    @attend = nil unless @result
+    flash[:notice] = '更新しました。' if @result
   end
 
   def activate
@@ -30,6 +43,7 @@ class AttendsController < ApplicationController
   end
 
   def destroy
+    @attend.report.destroy unless @attend.report.nil?
     @result = @attend.destroy
     @attend = nil unless @result
     flash[:notice] = '取消しました。' if @result
@@ -41,5 +55,9 @@ class AttendsController < ApplicationController
 
   def load_attend
     @attend = Attend.id_is(params[:id]).first if params[:id]
+  end
+
+  def attend_params
+    params.require(:attend).permit(:user_id, :seminor_id, report_attributes: [:_destroy, :id, :caption, :abstract, :document])
   end
 end

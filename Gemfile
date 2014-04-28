@@ -51,3 +51,5 @@ gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap
 gem 'momentjs-rails', '~> 2.5.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0'
 gem 'slim-rails'
+gem 'carrierwave'
+gem 'remotipart', '~> 1.2'

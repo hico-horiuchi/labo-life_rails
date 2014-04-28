@@ -1,0 +1,23 @@
+- unless @attend
+  - @attend = Attend.new
+  - @attend.build_report
+  - @title = '新規登録'
+  - @button_caption = '登録'
+  - seminor_id = params[:seminor_id]
+- else
+  - @attend.build_report if @attend.report.nil?
+  - @title = '編集'
+  - @button_caption = '更新'
+  - seminor_id = @attend.seminor.id
+
+= form_for @attend, html: { class: 'form' }, remote: true do |f|
+  - modal_body = capture do
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :seminor_id, value: seminor_id
+    = render partial: 'reports/form', locals: { f: f }
+
+  - modal_footer = capture do
+    = f.submit @button_caption, class: 'btn btn-primary'
+    = content_tag :button, "キャンセル", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+  - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

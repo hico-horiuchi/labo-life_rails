@@ -1,0 +1,36 @@
+= f.fields_for :report do |f_report|
+  .form-group
+    .checkbox
+      label
+        = f_report.check_box :_destroy, { checked: true }, false, true
+        | 報告・発表する
+  #attend_report_field
+    .form-group
+      = f_report.label :caption, 'キャプション', class: 'control-label'
+      = f_report.text_field :caption, autofocus: true, class: 'form-control', placeholder: '例) 週間報告'
+    .form-group
+      = f_report.label :abstract, '要約', class: 'control-label'
+      = f_report.text_area :abstract, autofocus: true, class: 'form-control', placeholder: '例) 作業内容など。', size: 'x5'
+    .form-group
+      = f_report.label :document, '資料', class: 'control-label'
+      = f_report.file_field :document, style: 'display: none;'
+      .input-group
+        input.form-control type="text" id="selected_file" readonly="readonly"
+        span.input-group-btn
+          a.btn.btn-default onclick="$('#attend_report_attributes_document').click();"
+            | ファイル選択
+
+script type="text/javascript"
+  | var report_field = $('#attend_report_field').html();
+  |
+  | $('#attend_report_attributes__destroy').change(function(){
+  |   if ($(this).is(':checked')) {
+  |     $('#attend_report_field').html(report_field);
+  |   } else {
+  |     $('#attend_report_field').empty();
+  |   }
+  | });
+  |
+  | $('#attend_report_attributes_document').change(function() {
+  |   $('#selected_file').val($(this).val());
+  | });
