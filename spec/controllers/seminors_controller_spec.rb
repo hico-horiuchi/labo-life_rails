@@ -1,4 +1,4 @@
-Brequire 'spec_helper'
+require 'spec_helper'
 
 describe SeminorsController do
   describe '#index' do
