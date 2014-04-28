@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   private
 
   def load_user
-    @user = User.id_is(params[:id]).first if params[:id]
+    @user = User.id_is(params[:id]) if params[:id]
   end
 
   def user_params

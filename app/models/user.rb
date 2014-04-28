@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true
   validates :student_no, presence: true, uniqueness: true
-  scope :id_is, -> (id) { where(id: id) }
+  scope :id_is, -> (id) { where(id: id).first }
 
   has_many :attends
   has_many :reports

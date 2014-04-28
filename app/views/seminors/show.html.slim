@@ -15,10 +15,10 @@ p
         td #{@seminor.place}
       tr
         td 議事
-        td #{User.id_is(@seminor.chairman_user_id).first.name}
+        td #{User.id_is(@seminor.chairman_user_id).name}
       tr
         td 作成者
-        td #{User.id_is(@seminor.created_user_id).first.name}
+        td #{User.id_is(@seminor.created_user_id).name}
       tr
         td 出席者
         td

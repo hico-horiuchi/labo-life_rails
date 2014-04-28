@@ -13,7 +13,7 @@
 class Attend < ActiveRecord::Base
   validates :user_id, presence: true
   validates :seminor_id, presence: true
-  scope :id_is, -> (id) { where(id: id) }
+  scope :id_is, -> (id) { where(id: id).first }
 
   belongs_to :user
   belongs_to :seminor

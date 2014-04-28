@@ -54,7 +54,7 @@ class AttendsController < ApplicationController
   private
 
   def load_attend
-    @attend = Attend.id_is(params[:id]).first if params[:id]
+    @attend = Attend.id_is(params[:id]) if params[:id]
   end
 
   def attend_params

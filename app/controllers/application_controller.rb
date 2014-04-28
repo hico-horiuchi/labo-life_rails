@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
   private
 
   def find_user_from_session
-    User.id_is(session[:user_id]).first if session[:user_id]
+    User.id_is(session[:user_id]) if session[:user_id]
   end
 end

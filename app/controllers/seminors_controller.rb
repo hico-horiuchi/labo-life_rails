@@ -63,7 +63,7 @@ class SeminorsController < ApplicationController
   private
 
   def load_seminor
-    @seminor = Seminor.id_is(params[:id]).first if params[:id]
+    @seminor = Seminor.id_is(params[:id]) if params[:id]
   end
 
   def seminor_params

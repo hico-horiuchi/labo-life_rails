@@ -19,7 +19,7 @@ class Report < ActiveRecord::Base
   validates :seminor_id, presence: true
   validates :caption, presence: true
   validates :abstract, presence: true
-  scope :id_is, -> (id) { where(id: id) }
+  scope :id_is, -> (id) { where(id: id).first }
 
   belongs_to :user
   belongs_to :seminor
