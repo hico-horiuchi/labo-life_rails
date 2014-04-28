@@ -8,32 +8,39 @@ p
   table.table.table-condensed.table-bordered
     tbody
       tr
-        th 日時
+        td 日時
         td #{@seminor.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{@seminor.end_at.strftime('%Y/%m/%d %H:%M')}
       tr
-        th 場所
+        td 場所
         td #{@seminor.place}
       tr
-        th 議事
+        td 議事
         td #{User.id_is(@seminor.chairman_user_id).first.name}
       tr
-        th 作成者
+        td 作成者
         td #{User.id_is(@seminor.created_user_id).first.name}
       tr
-        th 出席者
+        td 出席者
         td
           - i = 0
-          - @seminor.attends.each do |attend|
-            - if attend.active?
-              - if attend.report.nil?
-                span.label.label-default
-                  = attend.user.name
-              - else
-                span.label.label-info
-                  | #{attend.user.name}(発表)
+          - @seminor.attends.where(state: Attend::State::ACTIVE).each do |attend|
+            - if attend.report.nil?
+              span.label.label-default
+                = attend.user.name
             - else
-              span.label.label-warning
-                | #{attend.user.name}(欠席)
+              span.label.label-info
+                | #{attend.user.name}(発表)
+            | &nbsp;
+            - i += 1
+            - if i % 5 == 0
+              br
+      tr
+        td 欠席者
+        td
+          - i = 0
+          - @seminor.attends.where(state: Attend::State::INACTIVE).each do |attend|
+            span.label.label-warning
+              = attend.user.name
             | &nbsp;
             - i += 1
             - if i % 5 == 0
@@ -58,6 +65,6 @@ h3.bold
         p
           = linebreak_to_br report.abstract
         - if report.document_exist?
-          = link_to report.document.url, class: 'btn btn-info btn-sm', target: [:_blank] do
+          = link_to report.document.url, class: 'btn btn-default btn-sm', target: [:_blank] do
             span.glyphicon.glyphicon-file
             | &nbsp;#{report.document_filename}
