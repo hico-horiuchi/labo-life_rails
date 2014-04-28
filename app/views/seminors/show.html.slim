@@ -40,16 +40,19 @@ p
             - if i % 5 == 0
               br
       tr
-        td 欠席者
+        td.active
+          strong 欠席者
         td
           - i = 0
-          - @seminor.attends.where(state: Attend::State::INACTIVE).each do |attend|
-            span.label.label-warning
-              = attend.user.name
-            | &nbsp;
-            - i += 1
-            - if i % 5 == 0
-              br
+          - User.where(state: User::State::ACTIVE).each do |user|
+            - attend = @seminor.attends.where(user_id: user.id).first
+            - if attend.nil? || !attend.active?
+              span.label.label-warning
+                = user.name
+              | &nbsp;
+              - i += 1
+              - if i % 5 == 0
+                br
 
 h3.bold
   | 報告・発表&nbsp;
