@@ -58,6 +58,6 @@ class AttendsController < ApplicationController
   end
 
   def attend_params
-    params.require(:attend).permit(:user_id, :seminor_id, report_attributes: [:_destroy, :id, :caption, :abstract, :document])
+    params.require(:attend).permit(:user_id, :seminor_id, report_attributes: [:_destroy, :id, :user_id, :seminor_id, :caption, :abstract, :document])
   end
 end

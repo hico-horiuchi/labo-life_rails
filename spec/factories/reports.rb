@@ -9,6 +9,8 @@
 #  document   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  user_id    :integer          default(0), not null
+#  seminor_id :integer          default(0), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

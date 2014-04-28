@@ -24,6 +24,7 @@ class Seminor < ActiveRecord::Base
   scope :id_is, -> (id) { where(id: id) }
 
   has_many :attends
+  has_many :reports
 
   include State
 end

@@ -14,6 +14,9 @@
   - modal_body = capture do
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :seminor_id, value: seminor_id
+    = f.fields_for :report do |f_report|
+      = f_report.hidden_field :user_id, value: current_user.id
+      = f_report.hidden_field :seminor_id, value: seminor_id
     = render partial: 'reports/form', locals: { f: f }
 
   - modal_footer = capture do
