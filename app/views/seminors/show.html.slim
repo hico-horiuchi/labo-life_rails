@@ -70,9 +70,13 @@ h3.bold
           strong #{report.user.name}『#{report.caption}』
     .panel-collapse.collapse id="report_#{report.id}"
       .panel-body
-        p
+        p.monospace
           = linebreak_to_br report.abstract
         - if report.document_exist?
           = link_to report.document.url, class: 'btn btn-default btn-sm', target: [:_blank] do
             span.glyphicon.glyphicon-file
             | &nbsp;#{report.document_filename}
+          | &nbsp;
+        = link_to report_path(report.id), class: 'btn btn-info btn-sm' do
+          span.glyphicon.glyphicon-comment
+          | &nbsp;コメントする

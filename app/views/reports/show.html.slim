@@ -1,0 +1,12 @@
+- @title = @report.caption
+
+h3.bold #{@title}
+
+.well
+  p.monospace
+    = linebreak_to_br @report.abstract
+
+- if @report.document_exist?
+  = link_to @report.document.url, class: 'btn btn-default', target: [:_blank] do
+    span.glyphicon.glyphicon-file
+    | &nbsp;#{@report.document_filename}

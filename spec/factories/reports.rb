@@ -17,5 +17,7 @@
 
 FactoryGirl.define do
   factory :report do
+    caption '週間報告'
+    abstract '作業内容'
   end
 end
