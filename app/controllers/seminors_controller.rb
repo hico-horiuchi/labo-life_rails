@@ -6,7 +6,7 @@ class SeminorsController < ApplicationController
   def index
     from = Time.now.at_beginning_of_day
     to = from + 1.year
-    @seminors = Seminor.where(start_at: from...to).order(start_at: :asc)
+    @seminors = Seminor.where(end_at: from...to).order(start_at: :asc)
   end
 
   def show
