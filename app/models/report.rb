@@ -29,4 +29,8 @@ class Report < ActiveRecord::Base
     return false if document.path.nil?
     File.exist? document.path
   end
+
+  def document_filename
+    document.path.split('/').last
+  end
 end
