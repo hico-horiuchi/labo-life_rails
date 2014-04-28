@@ -1,13 +1,16 @@
 class UsersController < ApplicationController
   before_action :load_user
   before_action :authenticate_user!
-  before_action :assistant_user!, only: [:new, :create, :active, :deactive, :destroy]
+  before_action :assistant_user!, except: [:home, :index, :show, :edit, :update]
 
   def home
   end
 
   def index
-    @users = User.all.order(:id)
+    @users = User.all.order(level: :desc)
+  end
+
+  def show
   end
 
   def new

@@ -1,0 +1,29 @@
+- @title = @user.name
+
+h3.bold #{@title}
+
+p
+
+.table-responsive
+  table.table.table-condensed.table-bordered
+    tbody
+      tr
+        td 名前
+        td #{@user.name}
+      tr
+        td 学籍番号
+        td #{@user.student_no}
+      tr
+        td メールアドレス
+        td #{@user.email}
+      tr
+        td 権限
+        td
+          - if @user.teacher?
+            button.btn.btn-default.btn-xs
+              span.glyphicon.glyphicon-user
+              | &nbsp;#{Level::TEXT[Level::TEACHER]}
+          - elsif @user.assistant?
+            button.btn.btn-default.btn-xs
+              span.glyphicon.glyphicon-user
+              | &nbsp;#{Level::TEXT[Level::ASSISTANT]}

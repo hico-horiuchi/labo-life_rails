@@ -19,6 +19,16 @@ describe UsersController do
     it { expect(response).to be_success }
   end
 
+  describe '#show' do
+    before do
+      user = FactoryGirl.create(:student)
+      session[:user_id] = user.id
+      get :show, id: user.id
+    end
+    it { expect(response).to render_template :show }
+    it { expect(response).to be_success }
+  end
+
   describe '#new' do
     before do
       session[:user_id] = FactoryGirl.create(:assistant).id

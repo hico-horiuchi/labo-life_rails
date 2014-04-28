@@ -8,19 +8,19 @@ p
   table.table.table-condensed.table-bordered
     tbody
       tr
-        td 日時
+        th 日時
         td #{@seminor.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{@seminor.end_at.strftime('%Y/%m/%d %H:%M')}
       tr
-        td 場所
+        th 場所
         td #{@seminor.place}
       tr
-        td 議事
+        th 議事
         td #{User.id_is(@seminor.chairman_user_id).first.name}
       tr
-        td 作成者
+        th 作成者
         td #{User.id_is(@seminor.created_user_id).first.name}
       tr
-        td 出席者
+        th 出席者
         td
           - i = 0
           - @seminor.attends.where(state: Attend::State::ACTIVE).each do |attend|
