@@ -4,7 +4,7 @@
       - if current_user.assistant?
         th
       th キャプション
-      th 出席
+      th 出欠
       th 日時
       th 場所
       th 議事
@@ -51,13 +51,13 @@
                     span.glyphicon.glyphicon-minus
                     | &nbsp;欠席
                 - else
+                  = link_to edit_attend_path(attend.id), class: "btn btn-success btn-xs", remote: true do
+                    span.glyphicon.glyphicon-pencil
+                    | &nbsp;編集
+                  | &nbsp;
                   = link_to activate_attend_path(attend.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
                     span.glyphicon.glyphicon-repeat
-                    | &nbsp;復帰
-                  | &nbsp;
-                  = link_to attend_path(attend.id), class: "btn btn-danger btn-xs", remote: true, method: :delete do
-                    span.glyphicon.glyphicon-remove
-                    | &nbsp;取消
+                    | &nbsp;出席
               - else
                 = link_to new_attend_path(seminor.id), class: "btn btn-info btn-xs", remote: true do
                   span.glyphicon.glyphicon-flag
