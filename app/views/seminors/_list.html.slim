@@ -45,25 +45,25 @@
                 - attend = seminor.attends.where(user_id: current_user.id).first
                 - if attend
                   - if attend.active?
-                    = link_to edit_attend_path(attend.id), class: "btn btn-success btn-xs", remote: true do
-                      span.glyphicon.glyphicon-pencil
-                      | &nbsp;編集
-                    | &nbsp;
                     = link_to deactivate_attend_path(attend.id), class: "btn btn-warning btn-xs", remote: true, method: :post do
                       span.glyphicon.glyphicon-minus
                       | &nbsp;欠席
-                  - else
+                    | &nbsp;
                     = link_to edit_attend_path(attend.id), class: "btn btn-success btn-xs", remote: true do
                       span.glyphicon.glyphicon-pencil
                       | &nbsp;編集
-                    | &nbsp;
+                  - else
                     = link_to activate_attend_path(attend.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
-                      span.glyphicon.glyphicon-repeat
+                      span.glyphicon.glyphicon-flag
                       | &nbsp;出席
+                    | &nbsp;
+                    = link_to edit_attend_path(attend.id), class: "btn btn-success btn-xs", remote: true do
+                      span.glyphicon.glyphicon-pencil
+                      | &nbsp;編集
                 - else
-                  = link_to new_attend_path(seminor.id), class: "btn btn-info btn-xs", remote: true do
+                  = link_to new_attend_path(seminor.id), class: "btn btn-primary btn-xs", remote: true do
                     span.glyphicon.glyphicon-flag
-                    | &nbsp;登録
+                    | &nbsp;出席
           td
             #{seminor.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{seminor.end_at.strftime('%Y/%m/%d %H:%M')}
           td
