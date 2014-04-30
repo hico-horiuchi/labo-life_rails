@@ -29,3 +29,29 @@ p
           - elsif @user.assistant?
             span.glyphicon.glyphicon-user
             | &nbsp;#{Level::TEXT[Level::ASSISTANT]}
+
+h3.bold 報告・発表
+
+- reports = @user.reports.order(updated_at: :desc)
+- if reports.first.nil?
+  strong なし
+- else
+  .table-responsive
+    table.table.table-condensed.table-bordered
+      thead
+        th
+        th キャプション
+        th 更新日時
+      tbody
+        - i = 1
+        - reports.each do |report|
+          tr
+            td #{i}
+            td
+              | &nbsp;
+              = link_to report_path(report.id)  do
+                span.glyphicon.glyphicon-hand-right
+                | &nbsp;
+                = report.caption
+            td #{report.updated_at.strftime('%Y/%m/%d %H:%M')}
+          - i += 1

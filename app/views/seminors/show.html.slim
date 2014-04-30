@@ -56,7 +56,7 @@ p
 
 h3.bold 報告・発表
 
-- reports = @seminor.reports
+- reports = @seminor.reports.order(created_at: :asc)
 - if reports.first.nil?
   strong なし
 - else
