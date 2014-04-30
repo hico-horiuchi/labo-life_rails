@@ -54,10 +54,7 @@ p
               - if i % 5 == 0
                 br
 
-h3.bold
-  | 報告・発表&nbsp;
-  span.label.label-default
-    = @seminor.reports.size
+h3.bold 報告・発表
 
 - reports = @seminor.reports
 - if reports.first.nil?

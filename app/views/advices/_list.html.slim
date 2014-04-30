@@ -1,0 +1,32 @@
+- advices = @report.advices.order(updated_at: :desc)
+- if advices.first.nil?
+  strong なし
+- else
+  .well
+    - advices.each do |advice|
+      .row
+        - if advice.user.id == current_user.id
+          - direction = 'right'
+          - col = 'col-md-10'
+        - else
+          - direction = 'left'
+          - col = 'col-md-10 col-md-offset-2'
+        div class="#{col}"
+          .popover.show class="#{direction}" style="position:relative; max-width:100%;"
+            .arrow
+            h3.popover-title
+              | #{advice.user.name}&nbsp;&nbsp;
+              small #{advice.updated_at.strftime('%Y/%m/%d %H:%M')}
+              - if advice.user.id == current_user.id
+                | &nbsp;&nbsp;
+                = link_to edit_advice_path(advice.id), class: "btn btn-success btn-xs", remote: true do
+                  span.glyphicon.glyphicon-pencil
+                  | &nbsp;編集
+                | &nbsp;
+                = link_to advice_path(advice.id), class: "btn btn-danger btn-xs", remote: true, method: :delete do
+                  span.glyphicon.glyphicon-remove
+                  | &nbsp;削除
+            .popover-content
+              p
+                = linebreak_to_br advice.content
+      p

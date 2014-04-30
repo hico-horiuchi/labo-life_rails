@@ -18,3 +18,13 @@ p.monospace
   = link_to @report.document.url, class: 'btn btn-default', target: [:_blank] do
     span.glyphicon.glyphicon-file
     | &nbsp;#{@report.document_filename}
+
+h3.bold アドバイス
+
+= link_to new_advice_path(@report.id), class: 'btn btn-info', remote: true do
+  span.glyphicon.glyphicon-comment
+  | &nbsp;アドバイスする
+
+p
+
+= render partial: 'advices/list'

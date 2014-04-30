@@ -1,0 +1,23 @@
+- unless @advice
+  - @advice = Advice.new
+  - @title = '新規登録'
+  - @button_caption = '登録'
+  - report_id = params[:report_id]
+- else
+  - @title = '編集'
+  - @button_caption = '更新'
+  - report_id = @advice.report.id
+
+= form_for @advice, html: { class: 'form' }, remote: true do |f|
+  - modal_body = capture do
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :report_id, value: report_id
+    .form-group
+      = f.label :content, '内容', class: 'control-label'
+      = f.text_area :content, autofocus: true, class: 'form-control', placeholder: '例) 報告・発表に対する助言・質問など。', size: 'x5'
+
+  - modal_footer = capture do
+    = f.submit @button_caption, class: 'btn btn-primary'
+    = content_tag :button, "キャンセル", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+  - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer
