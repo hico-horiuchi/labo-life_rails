@@ -24,10 +24,8 @@ p
           strong 権限
         td
           - if @user.teacher?
-            button.btn.btn-default.btn-xs
-              span.glyphicon.glyphicon-user
-              | &nbsp;#{Level::TEXT[Level::TEACHER]}
+            span.glyphicon.glyphicon-user
+            | &nbsp;#{Level::TEXT[Level::TEACHER]}
           - elsif @user.assistant?
-            button.btn.btn-default.btn-xs
-              span.glyphicon.glyphicon-user
-              | &nbsp;#{Level::TEXT[Level::ASSISTANT]}
+            span.glyphicon.glyphicon-user
+            | &nbsp;#{Level::TEXT[Level::ASSISTANT]}
