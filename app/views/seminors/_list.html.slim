@@ -10,7 +10,7 @@
       th 議事
       th 作成者
     tbody
-      - @seminors.each do |seminor|
+      - seminors.each do |seminor|
         - unless seminor.active?
           - next unless current_user.assistant?
           - accent = 'active'

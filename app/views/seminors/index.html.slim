@@ -12,4 +12,16 @@ h3.bold #{@title}
 
 p
 
-= render partial: 'seminors/list'
+ul.nav.nav-tabs
+  li.active
+    a href="#after_seminors" data-toggle="tab"
+      | これから
+  li
+    a href="#before_seminors" data-toggle="tab"
+      | いままで
+
+.tab-content
+  .tab-pane.active#after_seminors
+    = render partial: 'seminors/list', locals: { seminors: @seminors_after }
+  .tab-pane#before_seminors
+    = render partial: 'seminors/list', locals: { seminors: @seminors_before }
