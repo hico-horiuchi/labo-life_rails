@@ -21,10 +21,8 @@ p.monospace
 
 h3.bold アドバイス
 
+= render partial: 'advices/list'
+
 = link_to new_advice_path(@report.id), class: 'btn btn-info', remote: true do
   span.glyphicon.glyphicon-comment
   | &nbsp;アドバイスする
-
-p
-
-= render partial: 'advices/list'

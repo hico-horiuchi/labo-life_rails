@@ -1,8 +1,9 @@
-- advices = @report.advices.order(updated_at: :desc)
+- advices = @report.advices.order(updated_at: :asc)
 - if advices.first.nil?
   strong なし
+  p
 - else
-  .well
+  .well#advice-area style="height: 500px; overflow-y: auto;"
     - advices.each do |advice|
       .row
         - if advice.user.id == current_user.id
@@ -30,3 +31,6 @@
               p
                 = linebreak_to_br advice.content
       p
+
+script type="text/javascript"
+  | $('#advice-area').animate({ scrollTop: $('#advice-area')[0].scrollHeight }, 'slow');
