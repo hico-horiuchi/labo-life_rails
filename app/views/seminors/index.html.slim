@@ -12,16 +12,48 @@ h3.bold #{@title}
 
 p
 
-ul.nav.nav-tabs
-  li.active
-    a href="#after_seminors" data-toggle="tab"
-      | これから
-  li
-    a href="#before_seminors" data-toggle="tab"
-      | いままで
+- seminors = @seminors.map do |seminor|
+  - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: seminors_path(seminor.id).gsub('.', '/'), allDay: false }
 
-.tab-content
-  .tab-pane.active#after_seminors
-    = render partial: 'seminors/list', locals: { seminors: @seminors_after, attend_allow: true }
-  .tab-pane#before_seminors
-    = render partial: 'seminors/list', locals: { seminors: @seminors_before, attend_allow: false }
+#calendar
+  script type="text/javascript"
+    | $(document).ready(function() {
+    |   $('#calendar').fullCalendar({
+    |     header: {
+    |       left: 'prev,next today',
+    |       center: 'title',
+    |       right: 'month,agendaWeek,agendaDay'
+    |     },
+    |     weekMode: 'liquid',
+    |     contentHeight: 400,
+    |     defaultView: 'month',
+    |     allDaySlot: false,
+    |     allDayText: '終日',
+    |     axisFormat: 'H:mm',
+    |     firstHour: 8,
+    |     timeFormat: { '': 'H:mm', agenda: 'H:mm{ - H:mm}' },
+    |     columnFormat: { month: 'ddd', week: "d'('ddd')'", day: "d'('ddd')'" },
+    |     titleFormat: { month: 'yyyy年M月', week: "yyyy年M月d日{ ～ }{[yyyy年]}{[M月]d日}", day: "yyyy年M月d日'('ddd')'" },
+    |     buttonText: { prev:'&lsaquo;', next: '&rsaquo;', prevYear: '&laquo;', nextYear: '&raquo;', today: '今日', month: '月', week: '週', day: '日' },
+    |     monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    |     monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    |     dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+    |     dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
+    |     editable: false,
+    |     events: #{raw seminors.to_json}
+    |   })
+    | });
+
+/ ul.nav.nav-tabs
+/   li.active
+/     a href="#after_seminors" data-toggle="tab"
+/       | これから
+/   li
+/     a href="#before_seminors" data-toggle="tab"
+/       | いままで
+/
+/ .tab-content
+/   .tab-pane.active#after_seminors
+/     = render partial: 'seminors/list', locals: { seminors: @seminors_after, attend_allow: true }
+/   .tab-pane#before_seminors
+/     = render partial: 'seminors/list', locals: { seminors: @seminors_before, attend_allow: false }
