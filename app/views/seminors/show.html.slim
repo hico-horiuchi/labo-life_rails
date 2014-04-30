@@ -77,7 +77,8 @@ h3.bold
             td
               | &nbsp;
               = link_to report_path(report.id)  do
-                span.glyphicon.glyphicon-new-window
+                span.glyphicon.glyphicon-hand-right
+                | &nbsp;
                 = report.caption
             td #{report.user.name}
           - i += 1
