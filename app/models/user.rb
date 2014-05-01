@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   has_many :attends
   has_many :reports
-  has_many :advices
+  has_many :comments
 
   include State
   include Level

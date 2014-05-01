@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   resources :reports
 
-  get 'advices/:report_id' => 'advices#new', as: :new_advice
-  resources :advices
+  get 'comments/:report_id' => 'comments#new', as: :new_comment
+  resources :comments
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

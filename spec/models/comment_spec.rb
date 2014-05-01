@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: advices
+# Table name: comments
 #
 #  id         :integer          not null, primary key
 #  content    :text             default(""), not null
@@ -10,12 +10,7 @@
 #  updated_at :datetime
 #
 
-class Advice < ActiveRecord::Base
-  validates :user_id, presence: true
-  validates :report_id, presence: true
-  validates :content, presence: true
-  scope :id_is, -> (id) { where(id: id).first }
+require 'spec_helper'
 
-  belongs_to :user
-  belongs_to :report
+describe Comment do
 end

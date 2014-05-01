@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AdvicesController do
+describe CommentsController do
   describe '#new' do
     before do
       user = FactoryGirl.create(:assistant)
@@ -36,11 +36,11 @@ describe AdvicesController do
       attend_params[:report_attributes][:user_id] = user.id
       attend_params[:report_attributes][:seminor_id] = seminor.id
       attend = Attend.create(attend_params)
-      advice_params = {}
-      advice_params[:user_id] = user.id
-      advice_params[:report_id] = attend.report.id
-      advice_params[:content] = 'アドバイス'
-      xhr :post, :create, advice: advice_params
+      comment_params = {}
+      comment_params[:user_id] = user.id
+      comment_params[:report_id] = attend.report.id
+      comment_params[:content] = 'コメント'
+      xhr :post, :create, comment: comment_params
     end
     it { expect(response).to be_success }
     it { expect(assigns[:result]).to be_true }
@@ -61,8 +61,8 @@ describe AdvicesController do
       attend_params[:report_attributes][:user_id] = user.id
       attend_params[:report_attributes][:seminor_id] = seminor.id
       attend = Attend.create(attend_params)
-      advice = attend.report.advices.create(content: 'アドバイス')
-      xhr :get, :edit, id: advice.id
+      comment = attend.report.comments.create(content: 'コメント')
+      xhr :get, :edit, id: comment.id
     end
     it { expect(response).to be_success }
   end
@@ -82,8 +82,8 @@ describe AdvicesController do
       attend_params[:report_attributes][:user_id] = user.id
       attend_params[:report_attributes][:seminor_id] = seminor.id
       attend = Attend.create(attend_params)
-      advice = attend.report.advices.create(content: 'アドバイス')
-      xhr :patch, :update, id: advice.id, advice: { content: 'アドバイス' }
+      comment = attend.report.comments.create(content: 'コメント')
+      xhr :patch, :update, id: comment.id, comment: { content: 'コメント' }
     end
     it { expect(response).to be_success }
     it { expect(assigns[:result]).to be_true }
@@ -104,8 +104,8 @@ describe AdvicesController do
       attend_params[:report_attributes][:user_id] = user.id
       attend_params[:report_attributes][:seminor_id] = seminor.id
       attend = Attend.create(attend_params)
-      advice = attend.report.advices.create(content: 'アドバイス')
-      xhr :delete, :destroy, id: advice.id
+      comment = attend.report.comments.create(content: 'コメント')
+      xhr :delete, :destroy, id: comment.id
     end
     it { expect(response).to be_success }
     it { expect(assigns[:result]).to be_true }

@@ -19,10 +19,10 @@ p.monospace
     span.glyphicon.glyphicon-file
     | &nbsp;#{@report.document_filename}
 
-h3.bold アドバイス
+h3.bold コメント
 
-= render partial: 'advices/list'
+= render partial: 'comments/list'
 
-= link_to new_advice_path(@report.id), class: 'btn btn-info', remote: true do
+= link_to new_comment_path(@report.id), class: 'btn btn-info', remote: true do
   span.glyphicon.glyphicon-comment
-  | &nbsp;アドバイスする
+  | &nbsp;コメントする

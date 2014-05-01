@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: advices
+# Table name: comments
 #
 #  id         :integer          not null, primary key
 #  content    :text             default(""), not null
@@ -10,9 +10,12 @@
 #  updated_at :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+class Comment < ActiveRecord::Base
+  validates :user_id, presence: true
+  validates :report_id, presence: true
+  validates :content, presence: true
+  scope :id_is, -> (id) { where(id: id).first }
 
-FactoryGirl.define do
-  factory :advice do
-  end
+  belongs_to :user
+  belongs_to :report
 end

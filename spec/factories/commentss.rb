@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: advices
+# Table name: comments
 #
 #  id         :integer          not null, primary key
 #  content    :text             default(""), not null
@@ -10,7 +10,9 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+# Read about factories at https://github.com/thoughtbot/factory_girl
 
-describe Advice do
+FactoryGirl.define do
+  factory :comment do
+  end
 end

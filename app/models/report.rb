@@ -24,7 +24,7 @@ class Report < ActiveRecord::Base
   belongs_to :user
   belongs_to :seminor
   belongs_to :attend
-  has_many :advices
+  has_many :comments
 
   def document_exist?
     return false if document.path.nil?
