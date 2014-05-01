@@ -1,7 +1,7 @@
 - @title = @seminor.caption
 
 - modal_body = capture do
-  .table-responsive
+  .table-responsive style="border: none;"
     table.table.table-borderless
       tbody
         tr
@@ -16,7 +16,7 @@
             | #{@seminor.place}
         - if @seminor.active? && @seminor.end_at >= Time.now
           tr
-            td
+            td.middle
               strong 出欠:&nbsp
             td
               - if @seminor.active?

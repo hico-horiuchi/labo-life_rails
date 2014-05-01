@@ -14,7 +14,15 @@ p
 
 - @seminors = @seminors.where(state: Seminor::State::ACTIVE) unless current_user.assistant?
 - seminors = @seminors.map do |seminor|
-  - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: attend_seminor_path(seminor.id).gsub('.', '/'), allDay: false }
+  - attend = seminor.attends.where(user_id: current_user.id).first
+  - if attend
+    - if attend.active?
+      - color = '#f0ad4e'
+    - else
+      - color = '#428bca'
+  - else
+    - color = '#428bca'
+  - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: attend_seminor_path(seminor.id).gsub('.', '/'), allDay: false, color: color }
 
 #calendar
   script type="text/javascript"
