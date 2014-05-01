@@ -1,4 +1,4 @@
-- comments = @report.comments.order(updated_at: :asc)
+- comments = @report.comments.order(created_at: :asc)
 - if comments.first.nil?
   strong なし
   p
@@ -20,10 +20,6 @@
               small #{comment.updated_at.strftime('%Y/%m/%d %H:%M')}
               - if comment.user.id == current_user.id
                 | &nbsp;&nbsp;
-                = link_to edit_comment_path(comment.id), class: "btn btn-success btn-xs", remote: true do
-                  span.glyphicon.glyphicon-pencil
-                  | &nbsp;編集
-                | &nbsp;
                 = link_to comment_path(comment.id), class: "btn btn-danger btn-xs", remote: true, method: :delete do
                   span.glyphicon.glyphicon-remove
                   | &nbsp;削除
