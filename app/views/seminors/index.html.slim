@@ -12,8 +12,9 @@ h3.bold #{@title}
 
 p
 
+- @seminors = @seminors.where(state: Seminor::State::ACTIVE) unless current_user.assistant?
 - seminors = @seminors.map do |seminor|
-  - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: seminors_path(seminor.id).gsub('.', '/'), allDay: false }
+  - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: attend_seminor_path(seminor.id).gsub('.', '/'), allDay: false }
 
 #calendar
   script type="text/javascript"
@@ -25,7 +26,7 @@ p
     |       right: 'month,agendaWeek,agendaDay'
     |     },
     |     weekMode: 'liquid',
-    |     contentHeight: 400,
+    |     contentHeight: 500,
     |     defaultView: 'month',
     |     allDaySlot: false,
     |     allDayText: '終日',
@@ -44,16 +45,10 @@ p
     |   })
     | });
 
-/ ul.nav.nav-tabs
-/   li.active
-/     a href="#after_seminors" data-toggle="tab"
-/       | これから
-/   li
-/     a href="#before_seminors" data-toggle="tab"
-/       | いままで
-/
-/ .tab-content
-/   .tab-pane.active#after_seminors
-/     = render partial: 'seminors/list', locals: { seminors: @seminors_after, attend_allow: true }
-/   .tab-pane#before_seminors
-/     = render partial: 'seminors/list', locals: { seminors: @seminors_before, attend_allow: false }
+script type="text/javascript"
+  | $(function(){
+  |   $('.fc-event').attr({ 'data-remote': 'true' });
+  | });
+  | $(document).on('click', '.fc-button', function(){
+  |   $('.fc-event').attr({ 'data-remote': 'true' });
+  | });

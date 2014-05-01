@@ -1,13 +1,17 @@
 class SeminorsController < ApplicationController
   before_action :load_seminor
   before_action :authenticate_user!
-  before_action :assistant_user!, except: [:index, :show]
+  before_action :assistant_user!, except: [:index, :show, :attend]
 
   def index
     @seminors = Seminor.all
   end
 
   def show
+  end
+
+  def attend
+    render :show_modal_attend
   end
 
   def new
