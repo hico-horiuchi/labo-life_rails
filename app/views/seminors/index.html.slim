@@ -17,11 +17,11 @@ p
   - attend = seminor.attends.where(user_id: current_user.id).first
   - if attend
     - if attend.active?
-      - color = '#f0ad4e'
-    - else
       - color = '#428bca'
+    - else
+      - color = '#f0ad4e'
   - else
-    - color = '#428bca'
+    - color = '#d9534f'
   - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: attend_seminor_path(seminor.id).gsub('.', '/'), allDay: false, color: color }
 
 #calendar
@@ -52,6 +52,15 @@ p
     |     events: #{raw seminors.to_json}
     |   })
     | });
+
+p
+
+div align="right"
+  button.btn.btn-primary.btn-xs 出席
+  | &nbsp;
+  button.btn.btn-warning.btn-xs 欠席
+  | &nbsp;
+  button.btn.btn-danger.btn-xs 未定
 
 script type="text/javascript"
   | $(function(){
