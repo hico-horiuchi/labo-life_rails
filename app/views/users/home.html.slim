@@ -1,3 +1,13 @@
 - @title = 'ホーム'
 
 h3.bold #{@title}
+
+- unless @undecide_seminors.empty?
+  .bs-callout.bs-callout-danger
+    h4 出欠が未定のゼミがあります!
+    p
+    - @undecide_seminors.each do |seminor|
+      = link_to attend_seminor_path(seminor.id), class: 'btn btn-sm btn-default', remote: true do
+        span.glyphicon.glyphicon-flag
+        | &nbsp;#{seminor.start_at.strftime('%Y/%m/%d %H:%M')} 『#{seminor.caption}』
+      p

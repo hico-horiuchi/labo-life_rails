@@ -4,6 +4,13 @@ class UsersController < ApplicationController
   before_action :assistant_user!, except: [:home, :index, :show, :edit, :update]
 
   def home
+    seminors = Seminor.all
+    @undecide_seminors = []
+    seminors.each do |seminor|
+      if seminor.attends.user_is(current_user.id).first.nil?
+        @undecide_seminors << seminor
+      end
+    end
   end
 
   def index
