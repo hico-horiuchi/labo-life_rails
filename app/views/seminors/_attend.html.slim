@@ -42,6 +42,10 @@
                   = link_to new_attend_path(@seminor.id), class: "btn btn-primary btn-xs", remote: true do
                     span.glyphicon.glyphicon-flag
                     | &nbsp;出席
+                  | &nbsp;
+                  = link_to absent_path(@seminor.id), class: "btn btn-warning btn-xs", remote: true, method: :post do
+                    span.glyphicon.glyphicon-minus
+                    | &nbsp;欠席
 
 - modal_footer = capture do
   - if current_user.assistant?
