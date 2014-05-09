@@ -1,3 +1,7 @@
+.fc-event:hover {
+  color: gray;
+}
+
 .fc th,
 .fc td {
   background-color: white;
