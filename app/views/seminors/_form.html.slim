@@ -34,7 +34,7 @@
     .form-group
       = f.label :chairman_user_id, '議事', class: 'col-md-4 control-label'
       .col-md-5
-        = f.collection_select :chairman_user_id, User.where(state: User::State::ACTIVE), :id, :name, {}, { class: 'form-control' }
+        = f.collection_select :chairman_user_id, User.where(state: State::ACTIVE), :id, :name, {}, { class: 'form-control' }
 
   - modal_footer = capture do
     = f.submit @button_caption, class: 'btn btn-primary'

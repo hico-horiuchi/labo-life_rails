@@ -36,7 +36,7 @@ class SeminorsController < ApplicationController
   end
 
   def activate
-    @seminor.state = Seminor::State::ACTIVE
+    @seminor.state = State::ACTIVE
     @result = @seminor.save
     @seminor = nil unless @result
     flash[:notice] = '復帰しました。' if @result
@@ -45,7 +45,7 @@ class SeminorsController < ApplicationController
   end
 
   def deactivate
-    @seminor.state = Seminor::State::INACTIVE
+    @seminor.state = State::INACTIVE
     @result = @seminor.save
     @seminor = nil unless @result
     flash[:notice] = '無効化しました。' if @result

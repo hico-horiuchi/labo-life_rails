@@ -28,7 +28,7 @@ p
           strong 出席者
         td
           - i = 0
-          - @seminor.attends.where(state: Attend::State::ACTIVE).each do |attend|
+          - @seminor.attends.where(state: State::ACTIVE).each do |attend|
             - if attend.report.nil?
               span.label.label-default
                 = attend.user.name
@@ -44,7 +44,7 @@ p
           strong 欠席者
         td
           - i = 0
-          - User.where(state: User::State::ACTIVE).each do |user|
+          - User.where(state: State::ACTIVE).each do |user|
             - attend = @seminor.attends.where(user_id: user.id).first
             - if attend.nil? || !attend.active?
               span.label.label-warning

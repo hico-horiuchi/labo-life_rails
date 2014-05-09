@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def activate
-    @user.state = User::State::ACTIVE
+    @user.state = State::ACTIVE
     @result = @user.save
     @user = nil unless @result
     flash[:notice] = '復帰しました。' if @result
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def deactivate
-    @user.state = User::State::INACTIVE
+    @user.state = State::INACTIVE
     @result = @user.save
     @user = nil unless @result
     flash[:notice] = '無効化しました。' if @result

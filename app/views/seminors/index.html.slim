@@ -12,7 +12,7 @@ h3.bold #{@title}
 
 p
 
-- @seminors = @seminors.where(state: Seminor::State::ACTIVE) unless current_user.assistant?
+- @seminors = @seminors.where(state: State::ACTIVE) unless current_user.assistant?
 - seminors = @seminors.map do |seminor|
   - attend = seminor.attends.where(user_id: current_user.id).first
   - if attend

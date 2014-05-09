@@ -26,14 +26,14 @@ class AttendsController < ApplicationController
 
 
   def absent
-    @attend = Attend.new(user_id: current_user.id, seminor_id: params[:seminor_id], state: Attend::State::INACTIVE)
+    @attend = Attend.new(user_id: current_user.id, seminor_id: params[:seminor_id], state: State::INACTIVE)
     @result = @attend.save
     @attend = nil unless @result
     flash[:notice] = '欠席しました。' if @result
   end
 
   def activate
-    @attend.state = Attend::State::ACTIVE
+    @attend.state = State::ACTIVE
     @result = @attend.save
     @attend = nil unless @result
     flash[:notice] = '復帰しました。' if @result
@@ -42,7 +42,7 @@ class AttendsController < ApplicationController
   end
 
   def deactivate
-    @attend.state = Attend::State::INACTIVE
+    @attend.state = State::INACTIVE
     @result = @attend.save
     @attend = nil unless @result
     flash[:notice] = '欠席しました。' if @result
