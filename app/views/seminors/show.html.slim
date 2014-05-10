@@ -30,11 +30,12 @@ p
           - i = 0
           - @seminor.attends.where(state: State::ACTIVE).each do |attend|
             - if attend.report.nil?
-              span.label.label-default
+              button.btn.btn-default.btn-xs data-toggle="tooltip" title="報告なし"
                 = attend.user.name
             - else
-              span.label.label-info
-                | #{attend.user.name}(発表)
+              button.btn.btn-info.btn-xs data-toggle="tooltip" title="#{attend.report.caption}"
+                = attend.user.name
+
             | &nbsp;
             - i += 1
             - if i % 5 == 0
@@ -46,13 +47,16 @@ p
           - i = 0
           - User.where(state: State::ACTIVE).each do |user|
             - attend = @seminor.attends.where(user_id: user.id).first
-            - if attend.nil? || !attend.active?
-              span.label.label-warning
+            - if attend.nil?
+              button.btn.btn-danger.btn-xs data-toggle="tooltip" title="出欠未定"
                 = user.name
-              | &nbsp;
-              - i += 1
-              - if i % 5 == 0
-                br
+            - elsif !attend.active?
+              button.btn.btn-warning.btn-xs data-toggle="tooltip" title="#{attend.absent_reason}"
+                = user.name
+            | &nbsp;
+            - i += 1
+            - if i % 5 == 0
+              br
 
 h3.bold 報告・発表
 
@@ -64,18 +68,21 @@ h3.bold 報告・発表
     table.table.table-condensed.table-bordered
       thead
         th
-        th キャプション
         th 報告・発表者
+        th キャプション
       tbody
         - i = 1
         - reports.each do |report|
           tr
             td #{i}
+            td #{report.user.name}
             td
               | &nbsp;
               = link_to report_path(report.id)  do
                 span.glyphicon.glyphicon-hand-right
                 | &nbsp;
                 = report.caption
-            td #{report.user.name}
           - i += 1
+
+script type="text/javascript"
+  | $('[data-toggle=tooltip]').tooltip()
