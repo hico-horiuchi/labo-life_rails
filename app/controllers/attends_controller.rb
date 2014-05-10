@@ -24,14 +24,6 @@ class AttendsController < ApplicationController
     flash[:notice] = '更新しました。' if @result
   end
 
-
-  def absent
-    @attend = Attend.new(user_id: current_user.id, seminor_id: params[:seminor_id], state: State::INACTIVE)
-    @result = @attend.save
-    @attend = nil unless @result
-    flash[:notice] = '欠席しました。' if @result
-  end
-
   def activate
     @attend.state = State::ACTIVE
     @result = @attend.save

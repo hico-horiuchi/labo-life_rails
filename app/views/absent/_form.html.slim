@@ -1,0 +1,25 @@
+- @title = '欠席'
+- unless @attend
+  - @attend = Attend.new
+  - @button_caption = '登録'
+  - @action = 'create'
+  - seminor_id = params[:seminor_id]
+- else
+  - @button_caption = '更新'
+  - @action = 'update'
+  - seminor_id = @attend.seminor.id
+
+= form_for @attend, url: { controller: :absent, action: @action }, html: { class: 'form' }, remote: true do |f|
+  - modal_body = capture do
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :seminor_id, value: seminor_id
+    = f.hidden_field :state, value: State::INACTIVE
+    .form-group
+      = f.label :absent_reason, '理由', class: 'control-label'
+      = f.text_field :absent_reason, autofocus: true, class: 'form-control', placeholder: '例) 体調不良'
+
+  - modal_footer = capture do
+    = f.submit @button_caption, class: 'btn btn-primary'
+    = content_tag :button, "キャンセル", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+  - modal_dialog :id => "modal-form", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

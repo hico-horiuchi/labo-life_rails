@@ -23,7 +23,7 @@
                 - attend = @seminor.attends.where(user_id: current_user.id).first
                 - if attend
                   - if attend.active?
-                    = link_to deactivate_attend_path(attend.id), class: "btn btn-warning btn-xs", remote: true, method: :post do
+                    = link_to edit_absent_path(attend.id), class: "btn btn-warning btn-xs", remote: true do
                       span.glyphicon.glyphicon-minus
                       | &nbsp;欠席
                     | &nbsp;
@@ -43,7 +43,7 @@
                     span.glyphicon.glyphicon-flag
                     | &nbsp;出席
                   | &nbsp;
-                  = link_to absent_path(@seminor.id), class: "btn btn-warning btn-xs", remote: true, method: :post do
+                  = link_to new_absent_path(@seminor.id), class: "btn btn-warning btn-xs", remote: true do
                     span.glyphicon.glyphicon-minus
                     | &nbsp;欠席
 
