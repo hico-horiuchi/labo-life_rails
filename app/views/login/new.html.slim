@@ -11,7 +11,7 @@ h3.bold #{@title}
     .form-group
       = f.label :password, 'パスワード', class: 'col-md-2 control-label'
       .col-md-5
-        = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: '例) password'
+        = f.password_field :password, autocomplete: 'off', class: 'form-control'
     .form-group
       .col-md-offset-2.col-md-5
         = f.submit 'サインイン', class: 'btn btn-info'
