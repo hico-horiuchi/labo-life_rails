@@ -10,11 +10,11 @@ class LoginController < ApplicationController
         flash[:notice] = 'ログインしました。'
         redirect_to home_user_path
       else
-        flash[:alert] = 'パスワードが間違っています。'
+        flash[:alert] = 'メールアドレスかパスワードが間違っています。'
         render :new
       end
     else
-      flash[:alert] = 'メールアドレスが間違っています。'
+      flash[:alert] = 'メールアドレスかパスワードが間違っています。'
       render :new
     end
   end
