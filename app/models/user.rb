@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
 
   include State
   include Grade
+
+  def last_name
+    name.split(' ').first
+  end
 end

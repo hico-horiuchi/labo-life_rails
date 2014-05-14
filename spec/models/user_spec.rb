@@ -16,4 +16,8 @@
 require 'spec_helper'
 
 describe User do
+  describe 'last_name' do
+    before { @user = FactoryGirl.create(:bachelor) }
+    it { expect(@user.last_name).to eq(@user.name) }
+  end
 end

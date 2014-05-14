@@ -83,5 +83,9 @@ h3.bold 報告・発表
                 = report.caption
           - i += 1
 
+= link_to new_minutes_path(@seminor.id), class: 'btn btn-info' do
+  span.glyphicon.glyphicon-envelope
+  | &nbsp;議事録
+
 script type="text/javascript"
   | $('[data-toggle=tooltip]').tooltip()

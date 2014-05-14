@@ -17,4 +17,14 @@
 require 'spec_helper'
 
 describe Seminor do
+  describe 'users' do
+    before do
+      user = FactoryGirl.create(:master)
+      seminor_params = FactoryGirl.attributes_for(:seminor)
+      seminor_params[:chairman_user_id] = user.id
+      seminor_params[:created_user_id] = user.id
+      @seminor = Seminor.create(seminor_params)
+    end
+    it { expect(@seminor.users(0)).to eq([]) }
+  end
 end

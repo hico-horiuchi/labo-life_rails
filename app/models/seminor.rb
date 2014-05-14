@@ -27,4 +27,8 @@ class Seminor < ActiveRecord::Base
   has_many :reports
 
   include State
+
+  def users(grade)
+    attends.where(state: State::ACTIVE).map { |attend| attend.user if attend.user.grade == grade }.delete_if { |user| user.nil? }
+  end
 end

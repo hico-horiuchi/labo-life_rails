@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     redirect_to home_user_path unless current_user.admin?
   end
 
+  def jpwday(date)
+    %w(日 月 火 水 木 金 土)[date.wday]
+  end
+
   private
 
   def find_user_from_session

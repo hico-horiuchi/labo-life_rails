@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get 'comments/:report_id' => 'comments#new', as: :new_comment
   resources :comments
 
+  get 'minutes/:seminor_id' => 'minutes#new', as: :new_minutes
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
