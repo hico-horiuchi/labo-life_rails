@@ -21,8 +21,8 @@ class MinutesController < ApplicationController
     (Grade::B1..Grade::TEACHER).to_a.reverse.each do |grade|
       users = seminor.users grade
       unless users.empty?
-        content += "◯ #{Grade::TEXT[grade]} &nbsp;"
-        content += '&nbsp;&nbsp;' if grade < Grade::ASSISTANT
+        content += "◯ #{Grade::TEXT[grade]}  "
+        content += '  ' if grade < Grade::ASSISTANT
         users.each { |user| content += user.last_name }
         content += "\n"
       end

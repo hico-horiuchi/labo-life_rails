@@ -2,6 +2,4 @@
 
 h3.bold #{@title}
 
-.well
-  p.monospace
-    = linebreak_to_br @content
+= text_area_tag :minutes, @content, class: 'form-control', size: 'x30'
