@@ -8,6 +8,6 @@
 
 # User
 User.destroy_all
-User.create(name: '教員', student_no: 'teacher', email: 'teacher@labolife.jp', password: 'password', password_confirmation: 'password', level: 2)
-User.create(name: '助手', student_no: 'assistant', email: 'assistant@labolife.jp', password: 'password', password_confirmation: 'password', level: 1)
-User.create(name: '学生', student_no: 'student', email: 'student@labolife.jp', password: 'password', password_confirmation: 'password', level: 0)
+User.create(name: '教員', student_no: 'teacher', email: 'teacher@labolife.jp', password: 'password', password_confirmation: 'password', grade: 10)
+User.create(name: '修士', student_no: 'master', email: 'master@labolife.jp', password: 'password', password_confirmation: 'password', grade: 4)
+User.create(name: '学士', student_no: 'bachelor', email: 'bachelor@labolife.jp', password: 'password', password_confirmation: 'password', grade: 3)

@@ -28,11 +28,11 @@
       = f.label :password_confirmation, 'パスワード (確認)', class: 'col-md-4 control-label'
       .col-md-5
         = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
-    - if current_user.assistant?
+    - if current_user.admin?
       .form-group
-        = f.label :level, 'レベル', class: 'col-md-4 control-label'
+        = f.label :grade, '学年', class: 'col-md-4 control-label'
         .col-md-5
-          = f.select :level, Level::SELECT, {}, { class: 'form-control' }
+          = f.select :grade, Grade::SELECT, {}, { class: 'form-control' }
 
   - modal_footer = capture do
     = f.submit @button_caption, class: 'btn btn-primary'

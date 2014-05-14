@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ReportsController do
   describe '#show' do
     before do
-      user = FactoryGirl.create(:student)
+      user = FactoryGirl.create(:bachelor)
       session[:user_id] = user.id
 
       seminor_params = FactoryGirl.attributes_for(:seminor)

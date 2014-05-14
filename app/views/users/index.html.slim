@@ -1,11 +1,11 @@
-- if current_user.assistant?
+- if current_user.admin?
   - @title = 'ユーザー管理'
 - else
   - @title = 'ユーザー'
 
 h3.bold #{@title}
 
-- if current_user.assistant?
+- if current_user.admin?
   = link_to new_user_path, class: 'btn btn-info', remote: true do
     span.glyphicon.glyphicon-plus
     | &nbsp;新規登録

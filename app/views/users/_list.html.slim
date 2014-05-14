@@ -1,19 +1,19 @@
 .table-responsive
   table.table.table-condensed.table-bordered
     thead
-      - if current_user.assistant?
+      - if current_user.admin?
         th
-      th 権限
+      th 学年
       th 名前
       th 学籍番号
       th メールアドレス
     tbody
       - @users.each do |user|
         - unless user.active?
-          - next unless current_user.assistant?
+          - next unless current_user.admin?
           - accent = 'active'
         tr class="#{accent}"
-          - if current_user.assistant?
+          - if current_user.admin?
             td
               - if user.active?
                 = link_to edit_user_path(user.id), class: "btn btn-success btn-xs", remote: true do
@@ -32,12 +32,7 @@
                   span.glyphicon.glyphicon-remove
                   | &nbsp;削除
           td
-            - if user.teacher?
-              span.glyphicon.glyphicon-user
-              | &nbsp;#{Level::TEXT[Level::TEACHER]}
-            - elsif user.assistant?
-              span.glyphicon.glyphicon-user
-              | &nbsp;#{Level::TEXT[Level::ASSISTANT]}
+            = Grade::TEXT[user.grade]
           td
             = link_to user_path(user.id) do
               span.glyphicon.glyphicon-hand-right

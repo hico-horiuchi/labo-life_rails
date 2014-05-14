@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :load_user
   before_action :authenticate_user!
-  before_action :assistant_user!, except: [:home, :index, :show, :edit, :update]
+  before_action :admin_user!, except: [:home, :index, :show, :edit, :update]
 
   def home
     seminors = Seminor.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.order(level: :desc)
+    @users = User.all.order(grade: :desc)
   end
 
   def show
@@ -32,12 +32,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    redirect_to home_user_path if !current_user.assistant? && params[:id].to_i != current_user.id
+    redirect_to home_user_path if !current_user.admin? && params[:id].to_i != current_user.id
     render :show_modal_form
   end
 
   def update
-    redirect_to home_user_path if !current_user.assistant? && params[:id].to_i != current_user.id
+    redirect_to home_user_path if !current_user.admin? && params[:id].to_i != current_user.id
     @result = @user.update(user_params)
     @user = nil unless @result
     flash[:notice] = '更新しました。' if @result
@@ -77,6 +77,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :name, :student_no, :password, :password_confirmation, :state, :level)
+    params.require(:user).permit(:email, :name, :student_no, :password, :password_confirmation, :state, :grade)
   end
 end

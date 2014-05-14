@@ -48,7 +48,7 @@
                     | &nbsp;欠席
 
 - modal_footer = capture do
-  - if current_user.assistant?
+  - if current_user.admin?
     - if @seminor.active?
       = link_to edit_seminor_path(@seminor.id), class: "btn btn-success", remote: true do
         span.glyphicon.glyphicon-pencil

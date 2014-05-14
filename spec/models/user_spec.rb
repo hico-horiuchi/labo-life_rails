@@ -8,7 +8,7 @@
 #  student_no      :string(255)      default(""), not null
 #  password_digest :string(255)
 #  state           :integer          default(0), not null
-#  level           :integer          default(0), not null
+#  grade           :integer          default(0), not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #

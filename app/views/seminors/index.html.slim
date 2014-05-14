@@ -1,18 +1,18 @@
-- if current_user.assistant?
+- if current_user.admin?
   - @title = 'ゼミナール管理'
 - else
   - @title = 'ゼミナール'
 
 h3.bold #{@title}
 
-- if current_user.assistant?
+- if current_user.admin?
   = link_to new_seminor_path, class: 'btn btn-info', remote: true do
     span.glyphicon.glyphicon-plus
     | &nbsp;新規登録
 
 p
 
-- @seminors = @seminors.where(state: State::ACTIVE) unless current_user.assistant?
+- @seminors = @seminors.where(state: State::ACTIVE) unless current_user.admin?
 - seminors = @seminors.map do |seminor|
   - attend = seminor.attends.where(user_id: current_user.id).first
   - if attend

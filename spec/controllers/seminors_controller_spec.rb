@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SeminorsController do
   describe '#index' do
     before do
-      session[:user_id] = FactoryGirl.create(:student).id
+      session[:user_id] = FactoryGirl.create(:bachelor).id
       get :index
     end
     it { expect(response).to render_template :index }
@@ -12,7 +12,7 @@ describe SeminorsController do
 
   describe '#show' do
     before do
-      user = FactoryGirl.create(:student)
+      user = FactoryGirl.create(:bachelor)
       session[:user_id] = user.id
       seminor_params = FactoryGirl.attributes_for(:seminor)
       seminor_params[:chairman_user_id] = user.id
@@ -26,7 +26,7 @@ describe SeminorsController do
 
   describe '#new' do
     before do
-      session[:user_id] = FactoryGirl.create(:assistant).id
+      session[:user_id] = FactoryGirl.create(:master).id
       xhr :get, :new
     end
     it { expect(response).to be_success }
@@ -34,7 +34,7 @@ describe SeminorsController do
 
   describe '#create' do
     before do
-      user = FactoryGirl.create(:assistant)
+      user = FactoryGirl.create(:master)
       session[:user_id] = user.id
       seminor_params = FactoryGirl.attributes_for(:seminor)
       seminor_params[:chairman_user_id] = user.id
@@ -48,7 +48,7 @@ describe SeminorsController do
 
   describe '#edit' do
     before do
-      user = FactoryGirl.create(:assistant)
+      user = FactoryGirl.create(:master)
       session[:user_id] = user.id
       seminor_params = FactoryGirl.attributes_for(:seminor)
       seminor_params[:chairman_user_id] = user.id
@@ -61,7 +61,7 @@ describe SeminorsController do
 
   describe '#update' do
     before do
-      user = FactoryGirl.create(:assistant)
+      user = FactoryGirl.create(:master)
       session[:user_id] = user.id
       seminor_params = FactoryGirl.attributes_for(:seminor)
       seminor_params[:chairman_user_id] = user.id

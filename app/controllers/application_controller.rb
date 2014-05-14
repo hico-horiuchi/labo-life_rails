@@ -15,12 +15,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def assistant_user!
-    redirect_to home_user_path unless current_user.assistant?
-  end
-
-  def teacher_user!
-    redirect_to home_user_path unless current_user.teacher?
+  def admin_user!
+    redirect_to home_user_path unless current_user.admin?
   end
 
   private

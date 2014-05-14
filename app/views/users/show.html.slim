@@ -21,14 +21,9 @@ p
         td #{@user.email}
       tr
         td.active
-          strong 権限
+          strong 学年
         td
-          - if @user.teacher?
-            span.glyphicon.glyphicon-user
-            | &nbsp;#{Level::TEXT[Level::TEACHER]}
-          - elsif @user.assistant?
-            span.glyphicon.glyphicon-user
-            | &nbsp;#{Level::TEXT[Level::ASSISTANT]}
+          = Grade::TEXT[user.grade]
 
 h3.bold 報告・発表
 

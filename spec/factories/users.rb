@@ -8,7 +8,7 @@
 #  student_no      :string(255)      default(""), not null
 #  password_digest :string(255)
 #  state           :integer          default(0), not null
-#  level           :integer          default(0), not null
+#  grade           :integer          default(0), not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #
@@ -16,22 +16,22 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :student, class: User do
-    name 'student'
-    student_no 'student'
-    email 'student@labolife.jp'
+  factory :bachelor, class: User do
+    name 'bachelor'
+    student_no 'bachelor'
+    email 'bachelor@labolife.jp'
     password 'hogehogehoge'
     password_confirmation 'hogehogehoge'
-    level 0
+    grade 3
   end
 
-  factory :assistant, class: User do
-    name 'assistant'
+  factory :master, class: User do
+    name 'master'
     student_no 'asistant'
-    email 'assistant@labolife.jp'
+    email 'master@labolife.jp'
     password 'hogehogehoge'
     password_confirmation 'hogehogehoge'
-    level 1
+    grade 4
   end
 
   factory :teacher, class: User do
@@ -40,6 +40,6 @@ FactoryGirl.define do
     email 'teacher@labolife.jp'
     password 'hogehogehoge'
     password_confirmation 'hogehogehoge'
-    level 2
+    grade 10
   end
 end

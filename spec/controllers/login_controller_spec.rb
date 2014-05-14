@@ -3,8 +3,8 @@ require 'spec_helper'
 describe LoginController do
   describe '#login' do
     before do
-      FactoryGirl.create(:student)
-      @user_params = FactoryGirl.attributes_for(:student)
+      FactoryGirl.create(:bachelor)
+      @user_params = FactoryGirl.attributes_for(:bachelor)
       post :login, user: @user_params
     end
     it { expect(response).to redirect_to home_user_path }
