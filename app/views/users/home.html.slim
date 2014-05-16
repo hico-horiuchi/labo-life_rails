@@ -4,13 +4,24 @@ h3.bold #{@title}
 
 - unless @undecide_seminors.empty?
   .bs-callout.bs-callout-danger
-    h4 出欠が未定のゼミがあります!
+    h4 出欠が未定のゼミナールがあります!
     p
     - @undecide_seminors.each do |seminor|
       = link_to attend_seminor_path(seminor.id), class: 'btn btn-sm btn-default', remote: true do
         span.glyphicon.glyphicon-flag
         | &nbsp;#{seminor.start_at.strftime('%Y/%m/%d %H:%M')} 『#{seminor.caption}』
       p
-- else
+
+- unless @undecide_events.empty?
+  .bs-callout.bs-callout-warning
+    h4 出欠が未定のイベントがあります!
+    p
+    - @undecide_events.each do |event|
+      = link_to attend_event_path(event.id), class: 'btn btn-sm btn-default', remote: true do
+        span.glyphicon.glyphicon-flag
+        | &nbsp;#{event.start_at.strftime('%Y/%m/%d %H:%M')} 『#{event.caption}』
+      p
+
+- if @undecide_seminors.empty? && @undecide_events.empty?
   .bs-callout.bs-callout-info
     h4 お知らせはありません。

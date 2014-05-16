@@ -23,4 +23,12 @@ FactoryGirl.define do
     end_at '2100/12/31 12:00'
     place '研究室'
   end
+
+  factory :event, class: Seminor do
+    caption 'ケーキ会'
+    start_at '2100/01/01 12:00'
+    end_at '2100/12/31 12:00'
+    place 'ラウンジ'
+    chairman_user_id 0
+  end
 end

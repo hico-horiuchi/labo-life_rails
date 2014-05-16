@@ -1,0 +1,55 @@
+- @title = @event.caption
+
+- modal_body = capture do
+  .table-responsive style="border: none;"
+    table.table.table-borderless
+      tbody
+        tr
+          td
+            strong 日時:&nbsp
+          td
+            | #{@event.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{@event.end_at.strftime('%Y/%m/%d %H:%M')}
+        tr
+          td
+            strong 場所:&nbsp
+          td
+            | #{@event.place}
+        - if @event.active? && @event.end_at >= Time.now
+          tr
+            td.middle
+              strong 出欠:&nbsp
+            td
+              - if @event.active?
+                - attend = @event.attends.where(user_id: current_user.id).first
+                - if attend
+                  - if attend.active?
+                    = link_to edit_absent_path(attend.id), class: "btn btn-warning btn-xs", remote: true do
+                      span.glyphicon.glyphicon-minus
+                      | &nbsp;欠席
+                  - else
+                    = link_to activate_attend_path(attend.id), class: "btn btn-primary btn-xs", remote: true, method: :post do
+                      span.glyphicon.glyphicon-flag
+                      | &nbsp;出席
+                - else
+                  = link_to new_attend_path(@event.id), class: "btn btn-primary btn-xs", remote: true do
+                    span.glyphicon.glyphicon-flag
+                    | &nbsp;出席
+                  | &nbsp;
+                  = link_to new_absent_path(@event.id), class: "btn btn-warning btn-xs", remote: true do
+                    span.glyphicon.glyphicon-minus
+                    | &nbsp;欠席
+
+- modal_footer = capture do
+  - if current_user.admin? || @event.created_user_id == current_user.id
+    = link_to edit_event_path(@event.id), class: "btn btn-success", remote: true do
+      span.glyphicon.glyphicon-pencil
+      | &nbsp;編集
+    = link_to event_path(@event.id), class: "btn btn-danger", remote: true, method: :delete do
+      span.glyphicon.glyphicon-remove
+      | &nbsp;削除
+  = link_to event_path(@event.id), class: "btn btn-info" do
+    span.glyphicon.glyphicon-new-window
+    | &nbsp;詳細
+  = content_tag :button, "キャンセル", class: 'btn btn-default', 'data-dismiss' => 'modal'
+
+= modal_dialog :id => "modal-attend", :header => { :show_close => true, :dismiss => 'modal', :title => @title }, body: modal_body, :footer => modal_footer

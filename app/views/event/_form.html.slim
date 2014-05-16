@@ -1,18 +1,21 @@
-- unless @seminor
-  - @seminor = Seminor.new
-  - @title = 'ゼミナール登録'
+- unless @event
+  - @event = Seminor.new
+  - @title = 'イベント登録'
   - @button_caption = '登録'
+  - @action = 'create'
 - else
-  - @title = 'ゼミナール編集'
+  - @title = 'イベント編集'
   - @button_caption = '更新'
+  - @action = 'update'
 
-= form_for @seminor, html: { class: 'form-horizontal' }, remote: true do |f|
+= form_for @event, url: { controller: :event, action: @action }, html: { class: 'form-horizontal' }, remote: true do |f|
   - modal_body = capture do
     = f.hidden_field :created_user_id, value: current_user.id
+    = f.hidden_field :chairman_user_id, value: 0
     .form-group
       = f.label :caption, 'キャプション', class: 'col-md-4 control-label'
       .col-md-5
-        = f.text_field :caption, autofocus: true, class: 'form-control', placeholder: '例) 定例ゼミナール'
+        = f.text_field :caption, autofocus: true, class: 'form-control', placeholder: '例) 誕生日会'
     .form-group
       = f.label :start_at, '開始日時', class: 'col-md-4 control-label'
       .col-md-5
@@ -30,11 +33,7 @@
     .form-group
       = f.label :place, '場所', class: 'col-md-4 control-label'
       .col-md-5
-        = f.text_field :place, autofocus: true, class: 'form-control', placeholder: '例) 研究室'
-    .form-group
-      = f.label :chairman_user_id, '議事', class: 'col-md-4 control-label'
-      .col-md-5
-        = f.collection_select :chairman_user_id, User.where(state: State::ACTIVE), :id, :name, {}, { class: 'form-control' }
+        = f.text_field :place, autofocus: true, class: 'form-control', placeholder: '例) ラウンジ'
 
   - modal_footer = capture do
     = f.submit @button_caption, class: 'btn btn-primary'

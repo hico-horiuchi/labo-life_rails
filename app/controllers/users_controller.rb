@@ -6,9 +6,11 @@ class UsersController < ApplicationController
   def home
     seminors = Seminor.all
     @undecide_seminors = []
+    @undecide_events = []
     seminors.each do |seminor|
       if seminor.attends.user_is(current_user.id).first.nil?
-        @undecide_seminors << seminor
+        @undecide_seminors << seminor if seminor.chairman_user_id !=  0
+        @undecide_events << seminor if seminor.chairman_user_id ==  0
       end
     end
   end

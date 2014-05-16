@@ -1,0 +1,53 @@
+- @title = @event.caption
+
+h3.bold #{@title}
+
+p
+
+.table-responsive
+  table.table.table-condensed.table-bordered
+    tbody
+      tr
+        td.active
+          strong 日時
+        td #{@event.start_at.strftime('%Y/%m/%d %H:%M')} ～ #{@event.end_at.strftime('%Y/%m/%d %H:%M')}
+      tr
+        td.active
+          strong 場所
+        td #{@event.place}
+      tr
+        td.active
+          strong 作成者
+        td #{User.id_is(@event.created_user_id).name}
+      tr
+        td.active
+          strong 出席者
+        td
+          - i = 0
+          - @event.attends.where(state: State::ACTIVE).each do |attend|
+            button.btn.btn-default.btn-xs
+              = attend.user.name
+            | &nbsp;
+            - i += 1
+            - if i % 5 == 0
+              br
+      tr
+        td.active
+          strong 欠席者
+        td
+          - i = 0
+          - User.where(state: State::ACTIVE).each do |user|
+            - attend = @event.attends.where(user_id: user.id).first
+            - if attend.nil?
+              button.btn.btn-danger.btn-xs data-toggle="tooltip" title="出欠未定"
+                = user.name
+            - elsif !attend.active?
+              button.btn.btn-warning.btn-xs data-toggle="tooltip" title="#{attend.absent_reason}"
+                = user.name
+            | &nbsp;
+            - i += 1
+            - if i % 5 == 0
+              br
+
+script type="text/javascript"
+  | $('[data-toggle=tooltip]').tooltip()

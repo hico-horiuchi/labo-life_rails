@@ -4,6 +4,13 @@ class AttendsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create, :update]
 
   def new
+    if Seminor.id_is(params[:seminor_id]).chairman_user_id == 0
+      @attend = Attend.new(user_id: current_user.id, seminor_id: params[:seminor_id])
+      @result = @attend.save
+      @attend = nil unless @result
+      flash[:notice] = '登録しました。' if @result
+      render :create and return
+    end
     render :show_modal_form
   end
 
