@@ -31,4 +31,9 @@ class Seminor < ActiveRecord::Base
   def users(grade)
     attends.where(state: State::ACTIVE).map { |attend| attend.user if attend.user.grade == grade }.delete_if { |user| user.nil? }
   end
+
+  def event?
+    return true if chairman_user_id == 0
+    return false
+  end
 end

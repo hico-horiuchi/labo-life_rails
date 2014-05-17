@@ -23,10 +23,11 @@ p
       - color = '#f0ad4e'
   - else
     - color = '#d9534f'
-  - if seminor.chairman_user_id == 0
-    - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: attend_event_path(seminor.id).gsub('.', '/'), allDay: false, color: color }
+  - if seminor.event?
+    - url = attend_event_path(seminor.id)
   - else
-    - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: attend_seminor_path(seminor.id).gsub('.', '/'), allDay: false, color: color }
+    - url = attend_seminor_path(seminor.id)
+  - { title: seminor.caption, start: seminor.start_at.strftime('%Y-%m-%d %H:%M:%S'), end: seminor.end_at.strftime('%Y-%m-%d %H:%M:%S'), url: url.gsub('.', '/'), allDay: false, color: color }
 
 #calendar
   script type="text/javascript"

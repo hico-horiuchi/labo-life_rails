@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     @undecide_events = []
     seminors.each do |seminor|
       if seminor.attends.user_is(current_user.id).first.nil?
-        @undecide_seminors << seminor if seminor.chairman_user_id !=  0
-        @undecide_events << seminor if seminor.chairman_user_id ==  0
+        @undecide_events << seminor and next if seminor.event?
+        @undecide_seminors << seminor
       end
     end
   end
