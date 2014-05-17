@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user!, except: [:home, :index, :show, :edit, :update]
 
   def home
-    seminors = Seminor.all
+    seminors = Seminor.where(end_at: (Date.today)..(Date.today + 1.year))
     @undecide_seminors = []
     @undecide_events = []
     seminors.each do |seminor|
